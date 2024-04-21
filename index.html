@@ -12,13 +12,19 @@
       height: 200px; /* Set a height for the container */
       margin: 0 auto;
     }
+    .cards-row-2 {
+      position: relative; /* Make the container position relative */
+      max-width: 80%; /* Ensure the container takes the full width */
+      height: 200px; /* Set a height for the container */
+      margin: 0 auto;
+      margin-top: 4px;
+    }
     .card {
       position: absolute; /* Position cards absolutely */
       top: 50%; /* Align cards vertically */
       transform: translateY(-50%); /* Center cards vertically */
       width: 15%; /* Adjust card width */
       min-height: 200px; /* Set minimum card height */
-      max-width: 60px;
       background-color: #ccc; /* Set card background color */
       border: 2px solid #000; /* Add border to cards */
       box-sizing: border-box; /* Include border in width calculation */
@@ -27,6 +33,27 @@
     .highlight {
       background-color: yellow; /* Highlight color */
     }
+  
+    .selected-cards {
+      display: none; /* Hide selected cards initially */
+      margin-top: 20px; /* Add margin between cards and continue button */
+    }
+    .selected-cards .card-container {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .selected-cards .card-title {
+      color: white;
+      margin-bottom: 5px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .show {
+      display: block !important; /* Show selected cards */
+    }
+
     body {
       background-color: rgb(9, 14, 18);
       margin: 0; /* Remove default body margin */
@@ -36,7 +63,7 @@
 </head>
 <body>
   <!-- Cards in one row -->
-  <div style="width: 80%; margin: 0 auto;"><h3 style="color: white;">Select 6 cards</h3></div>
+  <div id="title" style="width: 80%; margin: 0 auto;"><h3 style="color: white;">Select 6 cards</h3></div>
 
   <div class="cards-row">
     <div class="card on" data-id="1" style="left: 0%;" onclick="handleButtonClick(this)"></div>
@@ -52,7 +79,7 @@
     <div class="card on" data-id="11" style="left: 80%;" onclick="handleButtonClick(this)"></div>
   </div>
 
-  <div class="cards-row" style="margin-top: 4px;">
+  <div class="cards-row-2" style="margin-top: 4px;">
     <div class="card on" data-id="12" style="left: 0%;" onclick="handleButtonClick(this)"></div>
     <div class="card on" data-id="13" style="left: 8%;" onclick="handleButtonClick(this)"></div>
     <div class="card on" data-id="14" style="left: 16%;" onclick="handleButtonClick(this)"></div>
@@ -66,30 +93,103 @@
     <div class="card on" data-id="22" style="left: 80%;" onclick="handleButtonClick(this)"></div>
   </div>
 
+  <!-- Continue button -->
+  <button id="continueButton" onclick="showSelectedCards()" style="display: none;">Show Readings</button>
+
+  <!-- Selected cards container -->
+  <div class="selected-cards" id="selectedCardsContainer">
+    <!-- Selected cards will be dynamically added here -->
+  </div>
+
   <script>
-    let selectedCards = [];
+        let selectedCards = [];
 
-    function handleButtonClick(button) {
-      if (selectedCards.length >= 6 && !button.classList.contains('highlight')) {
-        alert('You cannot select more than 6 cards.');
-        return;
-      }
+        function handleButtonClick(button) {
+          if (selectedCards.length >= 6 && !button.classList.contains('highlight')) {
+            alert('You cannot select more than 6 cards.');
+            return;
+          }
 
-      // Highlight the clicked button
-      button.classList.toggle('highlight');
+          // Highlight the clicked button
+          button.classList.toggle('highlight');
 
-      // Toggle card in selectedCards array
-      const cardId = parseInt(button.getAttribute('data-id'));
-      const index = selectedCards.indexOf(cardId);
-      if (index === -1) {
-        selectedCards.push(cardId);
-      } else {
-        selectedCards.splice(index, 1);
-      }
+          // Toggle card in selectedCards array
+          const cardId = parseInt(button.getAttribute('data-id'));
+          const index = selectedCards.indexOf(cardId);
+          if (index === -1) {
+            selectedCards.push(cardId);
+          } else {
+            selectedCards.splice(index, 1);
+          }
 
-      // Print the IDs of selected cards to the console
-      console.log(selectedCards);
-    }
+          // Toggle continue button visibility
+          const continueButton = document.getElementById('continueButton');
+          continueButton.style.display = selectedCards.length >= 6 ? 'block' : 'none';
+
+          // Print the IDs of selected cards to the console
+          console.log(selectedCards);
+        }
+
+        function showSelectedCards() {
+          const selectedCardsContainer = document.getElementById('selectedCardsContainer');
+
+          // Clear existing content
+          selectedCardsContainer.innerHTML = '';
+
+          // Show the selected cards container
+          selectedCardsContainer.classList.add('show');
+
+          // Create a container for selected cards
+          const cardContainer = document.createElement('div');
+          cardContainer.classList.add('card-container');
+
+          // Populate the card container with selected cards
+          let card_idx = 0
+          let cardTitles = [
+            'How you feel about yourself',
+            'What you want most right now',
+            'Your fears',
+            'What is going for you',
+            'What is going against you',
+            'The likely outcome',
+          ]
+          selectedCards.forEach(cardId => {
+            const cardTitle = document.createElement('div');
+            cardTitle.classList.add('card-title');
+            cardTitle.textContent = 'Card ' + (card_idx + 1) + ': ' + cardTitles[card_idx];
+            cardContainer.appendChild(cardTitle);
+
+            const card = document.createElement('div');
+            card.classList.add('card');
+            card.textContent = cardId;
+            cardContainer.appendChild(card);
+
+            card_idx += 1
+          });
+
+          // Append the card container to the selected cards container
+          selectedCardsContainer.appendChild(cardContainer);
+
+
+          // Hide the cards row
+          selectedCardsContainer.querySelectorAll('.card').forEach(card => {
+            card.style.position = 'relative';
+            card.style.transform = 'none';
+            card.style.margin = '0 auto';
+            card.style.width = '210px';
+            card.style.height = '350px';
+            card.style.maxwidth = '100px';
+            card.style.marginBottom = '60px'
+          });
+          const title = document.querySelector('#title');
+          title.style.display = 'none';
+          const cardsRow = document.querySelector('.cards-row');
+          cardsRow.style.display = 'none';
+          const cardsRow2 = document.querySelector('.cards-row-2');
+          cardsRow2.style.display = 'none';
+          const continueButton = document.querySelector('#continueButton');
+          continueButton.style.display = 'none';
+        }
   </script>
 </body>
 </html>
