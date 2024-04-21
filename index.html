@@ -3,40 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>React Table with Buttons</title>
+  <title>Overlapping Cards with Borders</title>
   <style>
-    /* Style for buttons */
-    .button {
-      width: 100%;
-      height: auto;
-      font-size: 24px;
-      display: inline-block;
-      cursor: pointer;
-      border: none;
-      background: none;
-      outline: none;
-    }
-    .button img {
-      width: 100%;
-      max-height: auto;
-      vertical-align: middle;
-    }
-    
-    /* Style for table */
-    .table-container {
-      width: 90%;
-      display: flex;
-      justify-content: center;
+    /* Style for cards */
+    .cards-row {
+      position: relative; /* Make the container position relative */
+      max-width: 80%; /* Ensure the container takes the full width */
+      height: 200px; /* Set a height for the container */
       margin: 0 auto;
     }
-    table {
-      width: 100%;
-      border-collapse: collapse;
+    .card {
+      position: absolute; /* Position cards absolutely */
+      top: 50%; /* Align cards vertically */
+      transform: translateY(-50%); /* Center cards vertically */
+      width: 15%; /* Adjust card width */
+      min-height: 200px; /* Set minimum card height */
+      max-width: 60px;
+      background-color: #ccc; /* Set card background color */
+      border: 2px solid #000; /* Add border to cards */
+      box-sizing: border-box; /* Include border in width calculation */
+      margin: 0 5px; /* Add margin between cards */
     }
-    th, td {
-      border: 1px solid black;
-      padding: 8px;
-      text-align: center;
+    .highlight {
+      background-color: yellow; /* Highlight color */
     }
     body {
       background-color: rgb(9, 14, 18);
@@ -46,53 +35,45 @@
   </style>
 </head>
 <body>
-  <h1 style="margin: 0 auto; text-align: left; color: white; font-weight: bold; max-width: 85%;">Spreads</h1>
-  <div id="root"></div>
+  <!-- Cards in one row -->
+  <div style="width: 80%; margin: 0 auto;"><h3 style="color: white;">Select 6 cards</h3></div>
 
-  <!-- React and ReactDOM from CDN -->
-  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <div class="cards-row">
+    <div class="card on" data-id="1" style="left: 0%;" onclick="handleButtonClick(this)"></div>
+    <div class="card on" data-id="2" style="left: 8%;" onclick="handleButtonClick(this)"></div>
+    <div class="card on" data-id="3" style="left: 16%;" onclick="handleButtonClick(this)"></div>
+    <div class="card on" data-id="4" style="left: 24%;" onclick="handleButtonClick(this)"></div>
+    <div class="card on" data-id="5" style="left: 32%;" onclick="handleButtonClick(this)"></div>
+    <div class="card on" data-id="6" style="left: 40%;" onclick="handleButtonClick(this)"></div>
+    <div class="card on" data-id="7" style="left: 48%;" onclick="handleButtonClick(this)"></div>
+    <div class="card on" data-id="8" style="left: 56%;" onclick="handleButtonClick(this)"></div>
+    <div class="card on" data-id="9" style="left: 64%;" onclick="handleButtonClick(this)"></div>
+    <div class="card on" data-id="10" style="left: 72%;" onclick="handleButtonClick(this)"></div>
+    <div class="card on" data-id="11" style="left: 80%;" onclick="handleButtonClick(this)"></div>
+  </div>
 
-  <!-- Babel standalone to transpile JSX -->
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <div class="cards-row" style="margin-top: 4px;">
+    <div class="card on" data-id="12" style="left: 0%;" onclick="handleButtonClick(this)"></div>
+    <div class="card on" data-id="13" style="left: 8%;" onclick="handleButtonClick(this)"></div>
+    <div class="card on" data-id="14" style="left: 16%;" onclick="handleButtonClick(this)"></div>
+    <div class="card on" data-id=15" style="left: 24%;" onclick="handleButtonClick(this)"></div>
+    <div class="card on" data-id="16" style="left: 32%;" onclick="handleButtonClick(this)"></div>
+    <div class="card on" data-id="17" style="left: 40%;" onclick="handleButtonClick(this)"></div>
+    <div class="card on" data-id="18" style="left: 48%;" onclick="handleButtonClick(this)"></div>
+    <div class="card on" data-id="19" style="left: 56%;" onclick="handleButtonClick(this)"></div>
+    <div class="card on" data-id="20" style="left: 64%;" onclick="handleButtonClick(this)"></div>
+    <div class="card on" data-id="21" style="left: 72%;" onclick="handleButtonClick(this)"></div>
+    <div class="card on" data-id="22" style="left: 80%;" onclick="handleButtonClick(this)"></div>
+  </div>
 
-  <!-- Your React component -->
-  <script type="text/babel">
-    const { useState } = React;
+  <script>
+    function handleButtonClick(button) {
+      // Highlight the clicked button
+      button.classList.toggle('highlight');
 
-    const Table = () => {
-      const handleButton1Click = () => {
-        console.log("Button 1 clicked");
-      };
-
-      const handleButton2Click = () => {
-        console.log("Button 2 clicked");
-      };
-
-      return (
-        <div className="table-container">
-          <table>
-            <tbody>
-              <tr>
-                <td>
-                  <button className="button" onClick={handleButton1Click}>
-                    <img src="https://via.placeholder.com/100" alt="Icon 1" />
-                  </button>
-                </td>
-                <td>
-                  <button className="button" onClick={handleButton2Click}>
-                    <img src="https://via.placeholder.com/100" alt="Icon 2" />
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      );
-    };
-
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<Table />);
+      // Print the ID of the clicked button to the console
+      console.log(button.getAttribute('data-id'));
+    }
   </script>
 </body>
 </html>
