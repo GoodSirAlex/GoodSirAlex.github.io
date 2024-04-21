@@ -4,6 +4,40 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>React Table with Buttons</title>
+  <style>
+    /* Style for buttons */
+    .button {
+      width: 100%;
+      height: 100px;
+      font-size: 24px;
+      display: inline-block;
+      cursor: pointer;
+      border: none;
+      background: none;
+      outline: none;
+    }
+    .button img {
+      width: 100%;
+      height: 100%;
+      vertical-align: middle;
+    }
+    
+    /* Style for table */
+    .table-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
   <div id="root"></div>
@@ -20,41 +54,38 @@
     const { useState } = React;
 
     const Table = () => {
-      const [data, setData] = useState([
-        { id: 1, name: "Item 1" },
-        { id: 2, name: "Item 2" },
-        { id: 3, name: "Item 3" }
-      ]);
+      const handleButton1Click = () => {
+        console.log("Button 1 clicked");
+      };
 
-      const handleDelete = (id) => {
-        setData(data.filter((item) => item.id !== id));
+      const handleButton2Click = () => {
+        console.log("Button 2 clicked");
       };
 
       return (
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((item) => (
-              <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.name}</td>
+        <div className="table-container">
+          <table>
+            <tbody>
+              <tr>
                 <td>
-                  <button onClick={() => handleDelete(item.id)}>Delete</button>
+                  <button className="button" onClick={handleButton1Click}>
+                    <img src="https://via.placeholder.com/100" alt="Icon 1" />
+                  </button>
+                </td>
+                <td>
+                  <button className="button" onClick={handleButton2Click}>
+                    <img src="https://via.placeholder.com/100" alt="Icon 2" />
+                  </button>
                 </td>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       );
     };
 
-    ReactDOM.render(<Table />, document.getElementById('root'));
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<Table />);
   </script>
 </body>
 </html>
