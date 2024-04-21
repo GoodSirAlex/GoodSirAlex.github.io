@@ -67,12 +67,28 @@
   </div>
 
   <script>
+    let selectedCards = [];
+
     function handleButtonClick(button) {
+      if (selectedCards.length >= 6 && !button.classList.contains('highlight')) {
+        alert('You cannot select more than 6 cards.');
+        return;
+      }
+
       // Highlight the clicked button
       button.classList.toggle('highlight');
 
-      // Print the ID of the clicked button to the console
-      console.log(button.getAttribute('data-id'));
+      // Toggle card in selectedCards array
+      const cardId = parseInt(button.getAttribute('data-id'));
+      const index = selectedCards.indexOf(cardId);
+      if (index === -1) {
+        selectedCards.push(cardId);
+      } else {
+        selectedCards.splice(index, 1);
+      }
+
+      // Print the IDs of selected cards to the console
+      console.log(selectedCards);
     }
   </script>
 </body>
