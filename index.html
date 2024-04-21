@@ -144,7 +144,8 @@
         }
 
         function showSelectedCards() {
-          const selectedCardsContainer = document.getElementBy('selectedCardsContainer');
+          console.log('clicked')
+          const selectedCardsContainer = document.getElementById('selectedCardsContainer');
 
           // Clear existing content
           selectedCardsContainer.innerHTML = '';
@@ -200,7 +201,7 @@
           cardsRow.style.display = 'none';
           const cardsRow2 = document.querySelector('.cards-row-2');
           cardsRow2.style.display = 'none';
-          const continueButton = document.querySelector('.continueButton');
+          const continueButton = document.querySelector('#continueButton');
           continueButton.style.display = 'none';
         }
   </script>
