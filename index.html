@@ -26,12 +26,17 @@
       width: 15%; /* Adjust card width */
       min-height: 200px; /* Set minimum card height */
       background-color: #ccc; /* Set card background color */
+      background-size: cover;
+      background-position: center;
+      background-image: url('cards/back.jpeg');
       border: 2px solid #000; /* Add border to cards */
       box-sizing: border-box; /* Include border in width calculation */
       margin: 0 5px; /* Add margin between cards */
+      border-radius: 10px;
     }
     .highlight {
-      background-color: yellow; /* Highlight color */
+      transform: translateY(-54%);
+      background-image: url('cards/back_selected.jpeg');
     }
   
     .selected-cards {
@@ -95,7 +100,7 @@
     <div class="card on" data-id="11" style="left: 80%;" onclick="handleButtonClick(this)"></div>
   </div>
 
-  <div class="cards-row-2" style="margin-top: 4px;">
+  <div class="cards-row-2" style="margin-top: 32px;">
     <div class="card on" data-id="12" style="left: 0%;" onclick="handleButtonClick(this)"></div>
     <div class="card on" data-id="13" style="left: 8%;" onclick="handleButtonClick(this)"></div>
     <div class="card on" data-id="14" style="left: 16%;" onclick="handleButtonClick(this)"></div>
