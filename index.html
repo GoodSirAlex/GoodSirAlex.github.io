@@ -7,41 +7,38 @@
   <style>
     /* Style for cards */
     .cards-row {
-      position: relative; /* Make the container position relative */
-      max-width: 80%; /* Ensure the container takes the full width */
-      height: 200px; /* Set a height for the container */
+      position: relative;
+      width: 80%;
+      min-height: 200px;
+      max-height: 600px;
+      /* height: 200px; */
       margin: 0 auto;
     }
     .cards-row-2 {
-      position: relative; /* Make the container position relative */
-      max-width: 80%; /* Ensure the container takes the full width */
-      height: 200px; /* Set a height for the container */
+      position: relative;
+      width: 80%;
+      max-height: 600px;
+      min-height: 110px;
       margin: 0 auto;
-      margin-top: 4px;
     }
     .card {
-      position: absolute; /* Position cards absolutely */
-      top: 50%; /* Align cards vertically */
-      transform: translateY(-50%); /* Center cards vertically */
-      width: 15%; /* Adjust card width */
-      min-height: 200px; /* Set minimum card height */
-      background-color: #ccc; /* Set card background color */
-      background-size: cover;
-      background-position: center;
-      background-image: url('cards/back.jpeg');
-      border: 2px solid #000; /* Add border to cards */
-      box-sizing: border-box; /* Include border in width calculation */
-      margin: 0 5px; /* Add margin between cards */
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 15%;
+      max-height: 200px;
+      /* min-height: 200px; Set minimum card height */
+      background-color: none;
+      margin: 10px 5px;
       border-radius: 10px;
     }
     .highlight {
       transform: translateY(-54%);
-      background-image: url('cards/back_selected.jpeg');
     }
   
     .selected-cards {
-      display: none; /* Hide selected cards initially */
-      margin-top: 20px; /* Add margin between cards and continue button */
+      display: none;
+      margin-top: 20px;
     }
     .selected-cards .card-container {
       flex-wrap: wrap;
@@ -62,7 +59,7 @@
     #continueButton {
       display: none;
       margin: 0 auto;
-      margin-top: 20px;
+      margin-top: 90px;
       width: 180px;
       height: 44px;
       text-align: center;
@@ -84,34 +81,36 @@
 </head>
 <body>
   <!-- Cards in one row -->
-  <div id="title" style="width: 80%; margin: 0 auto;"><h3 style="color: white;">Select 6 cards</h3></div>
+  <div id="title" style="width: 80%; margin: 0 auto;"><h3 style="color: white; text-align: center;">Select 6 cards</h3></div>
 
-  <div class="cards-row">
-    <div class="card on" data-id="1" style="left: 0%;" onclick="handleButtonClick(this)"></div>
-    <div class="card on" data-id="2" style="left: 8%;" onclick="handleButtonClick(this)"></div>
-    <div class="card on" data-id="3" style="left: 16%;" onclick="handleButtonClick(this)"></div>
-    <div class="card on" data-id="4" style="left: 24%;" onclick="handleButtonClick(this)"></div>
-    <div class="card on" data-id="5" style="left: 32%;" onclick="handleButtonClick(this)"></div>
-    <div class="card on" data-id="6" style="left: 40%;" onclick="handleButtonClick(this)"></div>
-    <div class="card on" data-id="7" style="left: 48%;" onclick="handleButtonClick(this)"></div>
-    <div class="card on" data-id="8" style="left: 56%;" onclick="handleButtonClick(this)"></div>
-    <div class="card on" data-id="9" style="left: 64%;" onclick="handleButtonClick(this)"></div>
-    <div class="card on" data-id="10" style="left: 72%;" onclick="handleButtonClick(this)"></div>
-    <div class="card on" data-id="11" style="left: 80%;" onclick="handleButtonClick(this)"></div>
-  </div>
-
-  <div class="cards-row-2" style="margin-top: 32px;">
-    <div class="card on" data-id="12" style="left: 0%;" onclick="handleButtonClick(this)"></div>
-    <div class="card on" data-id="13" style="left: 8%;" onclick="handleButtonClick(this)"></div>
-    <div class="card on" data-id="14" style="left: 16%;" onclick="handleButtonClick(this)"></div>
-    <div class="card on" data-id=15" style="left: 24%;" onclick="handleButtonClick(this)"></div>
-    <div class="card on" data-id="16" style="left: 32%;" onclick="handleButtonClick(this)"></div>
-    <div class="card on" data-id="17" style="left: 40%;" onclick="handleButtonClick(this)"></div>
-    <div class="card on" data-id="18" style="left: 48%;" onclick="handleButtonClick(this)"></div>
-    <div class="card on" data-id="19" style="left: 56%;" onclick="handleButtonClick(this)"></div>
-    <div class="card on" data-id="20" style="left: 64%;" onclick="handleButtonClick(this)"></div>
-    <div class="card on" data-id="21" style="left: 72%;" onclick="handleButtonClick(this)"></div>
-    <div class="card on" data-id="22" style="left: 80%;" onclick="handleButtonClick(this)"></div>
+  <div style="margin: 0 auto;">
+    <div class="cards-row">
+      <div class="card on" data-id="1" style="left: 0%;" onclick="handleButtonClick(this)"><img src="cards/back.jpeg" class="card-image" style="object-fit: cover;  width: 100%; height: auto; "></img></div>
+      <div class="card on" data-id="2" style="left: 8%;" onclick="handleButtonClick(this)"><img src="cards/back.jpeg" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
+      <div class="card on" data-id="3" style="left: 16%;" onclick="handleButtonClick(this)"><img src="cards/back.jpeg" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
+      <div class="card on" data-id="4" style="left: 24%;" onclick="handleButtonClick(this)"><img src="cards/back.jpeg" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
+      <div class="card on" data-id="5" style="left: 32%;" onclick="handleButtonClick(this)"><img src="cards/back.jpeg" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
+      <div class="card on" data-id="6" style="left: 40%;" onclick="handleButtonClick(this)"><img src="cards/back.jpeg" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
+      <div class="card on" data-id="7" style="left: 48%;" onclick="handleButtonClick(this)"><img src="cards/back.jpeg" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
+      <div class="card on" data-id="8" style="left: 56%;" onclick="handleButtonClick(this)"><img src="cards/back.jpeg" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
+      <div class="card on" data-id="9" style="left: 64%;" onclick="handleButtonClick(this)"><img src="cards/back.jpeg" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
+      <div class="card on" data-id="10" style="left: 72%;" onclick="handleButtonClick(this)"><img src="cards/back.jpeg" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
+      <div class="card on" data-id="11" style="left: 80%;" onclick="handleButtonClick(this)"><img src="cards/back.jpeg" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
+    </div>
+  
+    <div class="cards-row-2" style="margin-top: 32px;">
+      <div class="card on" data-id="12" style="left: 0%;" onclick="handleButtonClick(this)"><img src="cards/back.jpeg" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
+      <div class="card on" data-id="13" style="left: 8%;" onclick="handleButtonClick(this)"><img src="cards/back.jpeg" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
+      <div class="card on" data-id="14" style="left: 16%;" onclick="handleButtonClick(this)"><img src="cards/back.jpeg" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
+      <div class="card on" data-id=15" style="left: 24%;" onclick="handleButtonClick(this)"><img src="cards/back.jpeg" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
+      <div class="card on" data-id="16" style="left: 32%;" onclick="handleButtonClick(this)"><img src="cards/back.jpeg" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
+      <div class="card on" data-id="17" style="left: 40%;" onclick="handleButtonClick(this)"><img src="cards/back.jpeg" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
+      <div class="card on" data-id="18" style="left: 48%;" onclick="handleButtonClick(this)"><img src="cards/back.jpeg" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
+      <div class="card on" data-id="19" style="left: 56%;" onclick="handleButtonClick(this)"><img src="cards/back.jpeg" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
+      <div class="card on" data-id="20" style="left: 64%;" onclick="handleButtonClick(this)"><img src="cards/back.jpeg" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
+      <div class="card on" data-id="21" style="left: 72%;" onclick="handleButtonClick(this)"><img src="cards/back.jpeg" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
+      <div class="card on" data-id="22" style="left: 80%;" onclick="handleButtonClick(this)"><img src="cards/back.jpeg" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
+    </div>
   </div>
 
   <!-- Continue button -->
@@ -139,8 +138,12 @@
           const index = selectedCards.indexOf(cardId);
           if (index === -1) {
             selectedCards.push(cardId);
+            var image = button.querySelector('img')
+            image.src= 'cards/back_selected.jpeg'
           } else {
             selectedCards.splice(index, 1);
+            var image = button.querySelector('img')
+            image.src= 'cards/back.jpeg'
           }
 
           // Toggle continue button visibility
