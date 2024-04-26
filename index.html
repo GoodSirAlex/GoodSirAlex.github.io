@@ -154,8 +154,12 @@
           console.log(selectedCards);
         }
 
+        function getRandomNumber(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+  
         function showSelectedCards() {
-          console.log('clicked')
           const selectedCardsContainer = document.getElementById('selectedCardsContainer');
 
           // Clear existing content
@@ -178,6 +182,21 @@
             'What is going against you',
             'The likely outcome',
           ]
+
+          var randomCards = [];
+          var selectedNumbers = new Set(); // Using a Set to keep track of selected numbers
+
+          // Generate 6 random values without repeating
+          while (randomCards.length < 6) {
+              var randomNumber = getRandomNumber(1, 22);
+              if (!selectedNumbers.has(randomNumber)) {
+                  selectedNumbers.add(randomNumber);
+                  randomCards.push(randomNumber);
+              }
+          }
+
+
+
           selectedCards.forEach(cardId => {
             const cardTitle = document.createElement('div');
             cardTitle.classList.add('card-title');
@@ -187,6 +206,12 @@
             const card = document.createElement('div');
             card.classList.add('card');
             card.textContent = cardId;
+
+            const card_image = document.createElement('img');
+            card_image.src = 'cards/' + String(randomCards[card_idx]) + '.jpeg'
+            card_image.style.width = '200px';
+            card_image.style.height = '312px';
+            card.appendChild(card_image)
             cardContainer.appendChild(card);
 
             card_idx += 1
@@ -201,9 +226,10 @@
             card.style.position = 'relative';
             card.style.transform = 'none';
             card.style.margin = '0 auto';
-            card.style.width = '210px';
-            card.style.height = '350px';
-            card.style.maxwidth = '100px';
+            card.style.width = '200px !important';
+            card.style.height = '312px !important';
+            card.style.maxWidth = '200px';
+            card.style.maxHeight = '312px'
             card.style.marginBottom = '60px'
           });
           const title = document.querySelector('#title');
