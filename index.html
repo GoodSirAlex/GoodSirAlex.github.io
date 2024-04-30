@@ -233,12 +233,12 @@
             card.style.maxHeight = '312px'
             card.style.marginBottom = '60px'
           });
+
+          document.querySelectorAll('.cards-row').forEach(cardsRow => {
+            cardsRow.style.display = 'none';
+          });
           const title = document.querySelector('#title');
           title.style.display = 'none';
-          const cardsRow = document.querySelector('.cards-row');
-          cardsRow.style.display = 'none';
-          const cardsRow2 = document.querySelector('.cards-row-2');
-          cardsRow2.style.display = 'none';
           const continueButton = document.querySelector('#continueButton');
           continueButton.style.display = 'none';
         }
