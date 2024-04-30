@@ -8,7 +8,7 @@
     /* Style for cards */
     .cards-row {
       position: relative;
-      width: 80%;
+      width: 98%;
       min-height: 200px;
       max-height: 600px;
       /* height: 200px; */
@@ -16,17 +16,17 @@
     }
     .cards-row-2 {
       position: relative;
-      width: 80%;
+      width: 98%;
       max-height: 600px;
-      min-height: 110px;
+      min-height: 200px;
       margin: 0 auto;
     }
     .card {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      width: 15%;
-      max-height: 200px;
+      width: 20%;
+      max-height: 400px;
       /* min-height: 200px; Set minimum card height */
       background-color: none;
       margin: 10px 5px;
@@ -143,7 +143,7 @@
           } else {
             selectedCards.splice(index, 1);
             var image = button.querySelector('img')
-            image.src= 'cards/back.jpeg'
+            image.src= 'cards/back.png'
           }
 
           // Toggle continue button visibility
