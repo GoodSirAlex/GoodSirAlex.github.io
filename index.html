@@ -6,66 +6,120 @@
 
   <title>Overlapping Cards with Borders</title>
   <style>
-    /* Style for cards */
-    .cards-row {
-      position: relative;
-      width: 98%;
-      min-height: 200px;
-      max-height: 600px;
-      /* height: 200px; */
-      margin: 0 auto;
+    .back-button {
+        cursor: pointer;
+        color: white;
+        width: 300px;
+        display: flex;
+        margin: 0 auto;
+        justify-content: left;
+        text-align: left;
+        display: none;
     }
   
-    .card {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 25%;
-      max-height: 400px;
-      /* min-height: 200px; Set minimum card height */
-      background-color: none;
-      margin: 10px 5px;
-      border-radius: 10px;
-    }
-    .highlight {
-      transform: translateY(-74%);
-    }
-  
-    .selected-cards {
-      display: none;
-      margin-top: 20px;
-    }
-    .selected-cards .card-container {
-      flex-wrap: wrap;
+    .main-container {
+      display: flex;
       justify-content: center;
+      margin-bottom: 20px;
     }
 
-    .selected-cards .card-title {
-      color: white;
-      margin-bottom: 5px;
-      font-weight: bold;
-      text-align: center;
+    .gif-column {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end; /* Align to the right */
+      align-items: center;
     }
 
-    .show {
-      display: block !important; /* Show selected cards */
+    .text-column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start; /* Align items to the left */
+      justify-content: flex-start; /* Align content to the left */
     }
 
-    #continueButton {
-      display: none;
+    .energy-button {
+      padding: 10px 10px;
+      font-size: 16px;
+      border: 1px solid #333;
+      border-radius: 10px;
+      cursor: pointer;
+      background-color: #f0f0f0;
+      text-overflow: ellipsis;
+      width: 80px;
+      height: 40px;
+      margin-left: 10px;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .button-column {
+        text-align: center;
+    }
+
+    .menu-button {
+        padding: 50px 10px;
+        margin: 10px;
+        font-size: 16px;
+        border: 1px solid #333;
+        border-radius: 10px;
+        cursor: pointer;
+        background-color: #f0f0f0;
+        text-overflow: ellipsis;
+        width: 140px;
+        height: 140px;
+    }
+
+    input {
+        margin: 10px;
+        padding: 20px;
+        font-size: 16px;
+        outline: none;
+    }
+
+    textarea {
+        border: none;
+        height: 80PX;
+        margin: 10px;
+        padding: 20px;
+        font-size: 16px;
+        outline: none;
+    }
+
+    .input-fields {
       margin: 0 auto;
-      margin-top: 40px;
-      margin-bottom: 80px;
-      width: 180px;
-      height: 44px;
-      text-align: center;
-      text-decoration: none;
-      border-radius: 12px;
+      background-color: white;
+      border-radius: 10px;
+      display: none;
+      flex-direction: column;
+      width: 80%;
+    }
+
+    .input-fields input {
       border: none;
-      font-size: 14px;
-      box-shadow: none;
-      background-image: linear-gradient(to right, #9c5ad2, #5a62fa);
-      color: white;
+      margin: 0 auto;
+      width: 80%;
+    }
+
+    .fixed-button-container {
+      position: fixed;
+      bottom: 0;
+      width: 100%; /* Full width */
+    }
+
+    .fixed-button {
+      padding: 20px 10px;
+      font-size: 16px;
+      border: 1px solid white;
+      border-radius: 0;
+      cursor: pointer;
+      background-color: #f0f0f0;
+      text-overflow: ellipsis;
+      width: 100%;
+      display: none;
     }
 
     body {
@@ -73,176 +127,249 @@
       margin: 0; /* Remove default body margin */
       padding: 0; /* Remove default body padding */
     }
-  </style>
+
+    h1 {
+      font-size: 16px;
+      font-weight: 400;
+      color: white;
+      width: 300px;
+      margin: 0 auto;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      display: none;
+    }
+</style>
 </head>
 <body>
-  <!-- Cards in one row -->
-  <div id="title" style="width: 80%; margin: 0 auto; margin-bottom: 20px;"><h1 style="color: white; text-align: center;">Select 6 cards</h1></div>
+  <header>
+    <div class="back-button" id="backButton" onclick="showMainMenu()"> < Back</div>
+  </header>
 
-  <div style="margin: 0 auto;">
-    <div class="cards-row">
-      <div class="card on" data-id="1" style="left: 2%;" onclick="handleButtonClick(this)"><img src="cards/back.png" class="card-image" style="object-fit: cover;  width: 100%; height: auto; "></img></div>
-      <div class="card on" data-id="2" style="left: 12%;" onclick="handleButtonClick(this)"><img src="cards/back.png" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
-      <div class="card on" data-id="3" style="left: 22%;" onclick="handleButtonClick(this)"><img src="cards/back.png" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
-      <div class="card on" data-id="4" style="left: 32%;" onclick="handleButtonClick(this)"><img src="cards/back.png" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
-      <div class="card on" data-id="5" style="left: 42%;" onclick="handleButtonClick(this)"><img src="cards/back.png" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
-      <div class="card on" data-id="6" style="left: 52%;" onclick="handleButtonClick(this)"><img src="cards/back.png" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
-      <div class="card on" data-id="7" style="left: 62%;" onclick="handleButtonClick(this)"><img src="cards/back.png" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
-      <div class="card on" data-id="8" style="left: 72%;" onclick="handleButtonClick(this)"><img src="cards/back.png" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
+  <div class="main-container" id="mainContainer">
+    <div class="gif-column">
+      <img src="cards/logo.gif" alt="GIF File" style="width: 100px; height: auto; margin-top: 40px; margin-right: 14px; border-radius: 50%;">
     </div>
-  
-    <div class="cards-row">
-      <div class="card on" data-id="9" style="left: 2%;" onclick="handleButtonClick(this)"><img src="cards/back.png" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
-      <div class="card on" data-id="10" style="left: 12%;" onclick="handleButtonClick(this)"><img src="cards/back.png" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
-      <div class="card on" data-id="11" style="left: 22%;" onclick="handleButtonClick(this)"><img src="cards/back.png" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
-      <div class="card on" data-id="12" style="left: 32%;" onclick="handleButtonClick(this)"><img src="cards/back.png" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
-      <div class="card on" data-id="13" style="left: 42%;" onclick="handleButtonClick(this)"><img src="cards/back.png" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
-      <div class="card on" data-id="14" style="left: 52%;" onclick="handleButtonClick(this)"><img src="cards/back.png" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
-      <div class="card on" data-id=15" style="left: 62%;" onclick="handleButtonClick(this)"><img src="cards/back.png" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
-      <div class="card on" data-id="16" style="left: 72%;" onclick="handleButtonClick(this)"><img src="cards/back.png" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
+    <div class="text-column">
+        <label style="color: white; margin-top: 40px; margin-bottom: 8px; margin-left: 10px; font-size: 24pt; font-weight: bold;">3 💎</label>
+        <label style="color: white; margin-bottom: 10px; margin-left: 10px; font-size: 14pt;">Magic gems</label>
+        <button class="energy-button">Top up</button>
     </div>
-  </div>
-
-  <div class="cards-row">
-    <div class="card on" data-id="17" style="left: 10%;" onclick="handleButtonClick(this)"><img src="cards/back.png" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
-    <div class="card on" data-id="18" style="left: 20%;" onclick="handleButtonClick(this)"><img src="cards/back.png" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
-    <div class="card on" data-id="19" style="left: 30%;" onclick="handleButtonClick(this)"><img src="cards/back.png" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
-    <div class="card on" data-id="20" style="left: 40%;" onclick="handleButtonClick(this)"><img src="cards/back.png" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
-    <div class="card on" data-id="21" style="left: 50%;" onclick="handleButtonClick(this)"><img src="cards/back.png" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
-    <div class="card on" data-id="22" style="left: 60%;" onclick="handleButtonClick(this)"><img src="cards/back.png" class="card-image" style="object-fit: cover; width: 100%; height: auto"></img></div>
-  </div>
 </div>
-
-
-  <!-- Continue button -->
-  <button id="continueButton" onclick="showSelectedCards()"">Show Readings</button>
-
-  <!-- Selected cards container -->
-  <div class="selected-cards" id="selectedCardsContainer">
-    <!-- Selected cards will be dynamically added here -->
+  <div class="button-container-title" id="buttonContainerTitle" style="display: flex; margin: 0 auto; justify-content: center;">
+    <h1 style="display: inline-block;">Spreads</h1>
   </div>
+  <div class="button-container">
+    <div class="button-column">
+      <div>
+        <button class="menu-button" onclick="showFields('name1')">Question to the cards</button>
+      </div>
+      <div>
+        <button class="menu-button" onclick="showFields('name1')">Relationships</button>
+      </div>
+      <div>
+        <button class="menu-button" onclick="showFields('name1')">Future Partner</button>
+      </div>
+        
+    </div>
+    <div class="button-column">
+      <div>
+        <button class="menu-button" onclick="showFields('name1')">Tomorrow</button>
+      </div>
+      <div>
+        <button class="menu-button" onclick="showFields('name1')">Career</button>
+      </div>  
+    </div>
+  </div>
+  <div>
+    <h1 id="questionToTheCardTitle">ENTER YOUR NAME AND DATE OF BIRTH</h1>
+    <div id="inputFields" class="input-fields">
+      <input type="text" id="nameInput" placeholder="Your name" style="margin-bottom: 0px; border-bottom: 1px solid #333;">
+      <input type="date" id="dobInput" style="margin-top: 0px;">
+    </div>
+    <h1 id="questionToTheCardTitle">YOUR QUESTION TO THE TAROT CARDS</h1>
+    <div id="inputFields" class="input-fields">
+      <textarea id="textInput"></textarea>
+    </div>
+  </div>
+
+  <div class="fixed-button-container">
+    <button class="fixed-button" id="questionToTheCardReadingButton">Get a reading</button>
+  </div>
+
 
   <script>
-        let selectedCards = [];
+    let selectedCards = [];
 
-        function handleButtonClick(button) {
-          if (selectedCards.length >= 6 && !button.classList.contains('highlight')) {
-            alert('You cannot select more than 6 cards.');
-            return;
+    function showFields(buttonName) {
+        mainContainer = document.getElementById('mainContainer')
+        mainContainer.style.display = 'none'
+
+        backButton = document.getElementById('backButton')
+        backButton.style.display = 'block'
+
+        buttonContainerTitle = document.getElementById('buttonContainerTitle')
+        buttonContainerTitle.style.display = 'none'
+
+        document.querySelectorAll('.menu-button').forEach(button => {
+            button.style.display = 'none';
+        });
+        document.querySelectorAll('#inputFields').forEach(inputField => {
+            inputField.style.display = 'flex'
+        })
+        document.querySelectorAll('#questionToTheCardTitle').forEach(titleField => {
+            titleField.style.display = 'flex'
+        })
+        getButton = document.getElementById('questionToTheCardReadingButton')
+        getButton.style.display = 'block'
+    }
+
+    function showMainMenu() {
+      document.querySelectorAll('.menu-button').forEach(button => {
+          button.style.display = 'flex';
+      });
+      document.getElementById('inputFields').style.display = 'none';
+      document.querySelectorAll('.back-button').forEach(backButton => {
+          backButton.style.display = 'none';
+      });
+      document.querySelectorAll('#inputFields').forEach(inputField => {
+            inputField.style.display = 'none'
+      })
+      document.querySelectorAll('#questionToTheCardTitle').forEach(titleField => {
+          titleField.style.display = 'none'
+      })
+      getButton = document.getElementById('questionToTheCardReadingButton')
+      getButton.style.display = 'block'
+      document.querySelectorAll('.main-container').forEach(mainContainer => {
+        mainContainer.style.display = 'flex';
+      });
+      document.querySelectorAll('.button-container').forEach(buttonContainer => {
+          buttonContainer.style.display = 'flex';
+      });
+      buttonContainerTitle = document.getElementById('buttonContainerTitle')
+      buttonContainerTitle.style.display = 'flex'
+
+      getButton = document.getElementById('questionToTheCardReadingButton')
+      getButton.style.display = 'none'
+    }
+
+    function handleButtonClick(button) {
+      if (selectedCards.length >= 6 && !button.classList.contains('highlight')) {
+        alert('You cannot select more than 6 cards.');
+        return;
+      }
+
+      // Highlight the clicked button
+      button.classList.toggle('highlight');
+
+      // Toggle card in selectedCards array
+      const cardId = parseInt(button.getAttribute('data-id'));
+      const index = selectedCards.indexOf(cardId);
+      if (index === -1) {
+        selectedCards.push(cardId);
+        var image = button.querySelector('img')
+        image.src= 'cards/back_selected.png'
+      } else {
+        selectedCards.splice(index, 1);
+        var image = button.querySelector('img')
+        image.src= 'cards/back.png'
+      }
+
+      // Toggle continue button visibility
+      const continueButton = document.getElementById('continueButton');
+      continueButton.style.display = selectedCards.length >= 6 ? 'block' : 'none';
+
+      // Print the IDs of selected cards to the console
+      console.log(selectedCards);
+    }
+
+    function getRandomNumber(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+
+    function showSelectedCards() {
+      const selectedCardsContainer = document.getElementById('selectedCardsContainer');
+
+      // Clear existing content
+      selectedCardsContainer.innerHTML = '';
+
+      // Show the selected cards container
+      selectedCardsContainer.classList.add('show');
+
+      // Create a container for selected cards
+      const cardContainer = document.createElement('div');
+      cardContainer.classList.add('card-container');
+
+      // Populate the card container with selected cards
+      let card_idx = 0
+      let cardTitles = [
+        'How you feel about yourself',
+        'What you want most right now',
+        'Your fears',
+        'What is going for you',
+        'What is going against you',
+        'The likely outcome',
+      ]
+
+      var randomCards = [];
+      var selectedNumbers = new Set(); // Using a Set to keep track of selected numbers
+
+      // Generate 6 random values without repeating
+      while (randomCards.length < 6) {
+          var randomNumber = getRandomNumber(1, 22);
+          if (!selectedNumbers.has(randomNumber)) {
+              selectedNumbers.add(randomNumber);
+              randomCards.push(randomNumber);
           }
-
-          // Highlight the clicked button
-          button.classList.toggle('highlight');
-
-          // Toggle card in selectedCards array
-          const cardId = parseInt(button.getAttribute('data-id'));
-          const index = selectedCards.indexOf(cardId);
-          if (index === -1) {
-            selectedCards.push(cardId);
-            var image = button.querySelector('img')
-            image.src= 'cards/back_selected.png'
-          } else {
-            selectedCards.splice(index, 1);
-            var image = button.querySelector('img')
-            image.src= 'cards/back.png'
-          }
-
-          // Toggle continue button visibility
-          const continueButton = document.getElementById('continueButton');
-          continueButton.style.display = selectedCards.length >= 6 ? 'block' : 'none';
-
-          // Print the IDs of selected cards to the console
-          console.log(selectedCards);
-        }
-
-        function getRandomNumber(min, max) {
-            return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
-
-  
-        function showSelectedCards() {
-          const selectedCardsContainer = document.getElementById('selectedCardsContainer');
-
-          // Clear existing content
-          selectedCardsContainer.innerHTML = '';
-
-          // Show the selected cards container
-          selectedCardsContainer.classList.add('show');
-
-          // Create a container for selected cards
-          const cardContainer = document.createElement('div');
-          cardContainer.classList.add('card-container');
-
-          // Populate the card container with selected cards
-          let card_idx = 0
-          let cardTitles = [
-            'How you feel about yourself',
-            'What you want most right now',
-            'Your fears',
-            'What is going for you',
-            'What is going against you',
-            'The likely outcome',
-          ]
-
-          var randomCards = [];
-          var selectedNumbers = new Set(); // Using a Set to keep track of selected numbers
-
-          // Generate 6 random values without repeating
-          while (randomCards.length < 6) {
-              var randomNumber = getRandomNumber(1, 22);
-              if (!selectedNumbers.has(randomNumber)) {
-                  selectedNumbers.add(randomNumber);
-                  randomCards.push(randomNumber);
-              }
-          }
+      }
 
 
 
-          selectedCards.forEach(cardId => {
-            const cardTitle = document.createElement('div');
-            cardTitle.classList.add('card-title');
-            cardTitle.textContent = 'Card ' + (card_idx + 1) + ': ' + cardTitles[card_idx];
-            cardContainer.appendChild(cardTitle);
+      selectedCards.forEach(cardId => {
+        const cardTitle = document.createElement('div');
+        cardTitle.classList.add('card-title');
+        cardTitle.textContent = 'Card ' + (card_idx + 1) + ': ' + cardTitles[card_idx];
+        cardContainer.appendChild(cardTitle);
 
-            const card = document.createElement('div');
-            card.classList.add('card');
-            card.textContent = cardId;
+        const card = document.createElement('div');
+        card.classList.add('card');
+        card.textContent = cardId;
 
-            const card_image = document.createElement('img');
-            card_image.src = 'cards/' + String(randomCards[card_idx]) + '.jpeg'
-            card_image.style.width = '200px';
-            card_image.style.height = '312px';
-            card.appendChild(card_image)
-            cardContainer.appendChild(card);
+        const card_image = document.createElement('img');
+        card_image.src = 'cards/' + String(randomCards[card_idx]) + '.jpeg'
+        card_image.style.width = '200px';
+        card_image.style.height = '312px';
+        card.appendChild(card_image)
+        cardContainer.appendChild(card);
 
-            card_idx += 1
-          });
+        card_idx += 1
+      });
 
-          // Append the card container to the selected cards container
-          selectedCardsContainer.appendChild(cardContainer);
+      // Append the card container to the selected cards container
+      selectedCardsContainer.appendChild(cardContainer);
 
 
-          // Hide the cards row
-          selectedCardsContainer.querySelectorAll('.card').forEach(card => {
-            card.style.position = 'relative';
-            card.style.transform = 'none';
-            card.style.margin = '0 auto';
-            card.style.width = '200px !important';
-            card.style.height = '312px !important';
-            card.style.minWidth = '200px';
-            card.style.maxWidth = '200px';
-            card.style.maxHeight = '312px'
-            card.style.marginBottom = '60px'
-          });
+      // Hide the cards row
+      selectedCardsContainer.querySelectorAll('.card').forEach(card => {
+        card.style.position = 'relative';
+        card.style.transform = 'none';
+        card.style.margin = '0 auto';
+        card.style.width = '200px !important';
+        card.style.height = '312px !important';
+        card.style.minWidth = '200px';
+        card.style.maxWidth = '200px';
+        card.style.maxHeight = '312px'
+        card.style.marginBottom = '60px'
+      });
 
-          document.querySelectorAll('.cards-row').forEach(cardsRow => {
-            cardsRow.style.display = 'none';
-          });
-          const title = document.querySelector('#title');
-          title.style.display = 'none';
-          const continueButton = document.querySelector('#continueButton');
-          continueButton.style.display = 'none';
-        }
+      document.querySelectorAll('.cards-row').forEach(cardsRow => {
+        cardsRow.style.display = 'none';
+      });
+      const title = document.querySelector('#title');
+      title.style.display = 'none';
+      const continueButton = document.querySelector('#continueButton');
+      continueButton.style.display = 'none';
+    }
   </script>
 </body>
 </html>
