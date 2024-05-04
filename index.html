@@ -106,7 +106,7 @@
 
     .fixed-button-container {
       position: fixed;
-      bottom: 0;
+      bottom: 20px;
       width: 100%; /* Full width */
     }
 
@@ -141,10 +141,6 @@
 </style>
 </head>
 <body>
-  <header>
-    <div class="back-button" id="backButton" onclick="showMainMenu()"> < Back</div>
-  </header>
-
   <div class="main-container" id="mainContainer">
     <div class="gif-column">
       <img src="cards/logo.gif" alt="GIF File" style="width: 100px; height: auto; margin-top: 40px; margin-right: 14px; border-radius: 50%;">
@@ -204,8 +200,8 @@
         mainContainer = document.getElementById('mainContainer')
         mainContainer.style.display = 'none'
 
-        backButton = document.getElementById('backButton')
-        backButton.style.display = 'block'
+        // backButton = document.getElementById('backButton')
+        // backButton.style.display = 'block'
 
         buttonContainerTitle = document.getElementById('buttonContainerTitle')
         buttonContainerTitle.style.display = 'none'
