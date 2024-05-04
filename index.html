@@ -257,16 +257,16 @@
       getButton.style.display = 'none'
     }
 
-    function formatDate(input) {
-        var value = input.value.replace(/\D/g, '').substring(0, 8);
-        if (value.length > 2) {
-            value = value.substring(0, 2) + '.' + value.substring(2);
+     // Function to dismiss keyboard on tap outside of input fields
+     document.addEventListener('click', function(event) {
+        var target = event.target;
+        if (!target.tagName.match(/input|textarea/i)) {
+            var activeElement = document.activeElement;
+            if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA')) {
+                activeElement.blur();
+            }
         }
-        if (value.length > 5) {
-            value = value.substring(0, 5) + '.' + value.substring(5, 9);
-        }
-        input.setAttribute('placeholder', value || '11.mm.yyyy');
-    }
+    });
 
     function handleButtonClick(button) {
       if (selectedCards.length >= 6 && !button.classList.contains('highlight')) {
