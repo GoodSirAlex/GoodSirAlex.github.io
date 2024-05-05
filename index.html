@@ -609,6 +609,7 @@
     }
 
     function handleMainButtonClick() {
+      Telegram.WebApp.showAlert(mainButton.text)
       if (mainButton.text === 'Do a spread for x magic gems') {
         showMoreUserDetails()
       } else if (mainButton.text === 'Get a reading') {
