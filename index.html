@@ -321,6 +321,8 @@
     }
 
     const mainButton = window.Telegram.WebApp.MainButton;
+    mainButton.onClick(handleMainButtonClick())
+
 
     var selectedSpread = 'questionToTheCards'
     var userName = ''
@@ -370,8 +372,6 @@
       mainButton.enable();
       mainButton.show();
 
-      mainButton.onClick(showMoreUserDetails())
-
       selectedSpread = buttonName
 
     }
@@ -408,7 +408,7 @@
         // getButton.style.display = 'block'
 
         mainButton.text = "Get a reading";
-        mainButton.onClick(showReading())
+        // mainButton.onClick(showReading())
     }
 
     function hideMoreUserDetails() {
@@ -497,7 +497,7 @@
         // shareButton.style.display = 'block'
 
         mainButton.text = "Share";
-        mainButton.onClick(shareOnTelegram())
+        // mainButton.onClick(shareOnTelegram())
       }
 
     }
@@ -551,27 +551,33 @@
 
     function shareOnTelegram() {
     // Check if Telegram Mini App API is available
-    if (window.TG !== undefined) {
-        // Define the content to share
-        const content = {
-            text: "Check out this awesome content!",
-            url: "https://example.com",
-            // Add any other relevant parameters such as media, etc.
-        };
+      if (window.TG !== undefined) {
+          // Define the content to share
+          const content = {
+              text: "Check out this awesome content!",
+              url: "https://example.com",
+              // Add any other relevant parameters such as media, etc.
+          };
 
-        // Use the API to share content
-        window.TG.Share.share(content)
-            .then(() => {
-                console.log("Shared successfully!");
-            })
-            .catch((error) => {
-                console.error("Error sharing:", error);
-            });
-    } else {
-        // Telegram Mini App API not available
-        console.error("Telegram Mini App API is not available.");
+          // Use the API to share content
+          window.TG.Share.share(content)
+              .then(() => {
+                  console.log("Shared successfully!");
+              })
+              .catch((error) => {
+                  console.error("Error sharing:", error);
+              });
+      } else {
+          // Telegram Mini App API not available
+          console.error("Telegram Mini App API is not available.");
+      }
     }
-}
+
+    function handleMainButtonClick() {
+      if (mainButton.text === 'Do a spread for x magic gem') {
+        showMoreUserDetails()
+      }
+    }
 
   </script>
 </body>
