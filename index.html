@@ -264,7 +264,7 @@
       <img src="cards/3.jpeg" alt="Image 3">
     </div>
   </div>
-  <div class="reading-details-container">
+  <div class="reading-details-container" style="margin-bottom: 100px;">
     <h1 id="readingTitle"></h1>
     <div class="reading-details-subtitle" id="readingDetailsSubtitle" style="color: white; margin: 0 auto; margin-bottom: 20px;"></div>
     <div class="reding-details" id="readingDetails" style="color: white; margin: 0 auto;"></div>
@@ -421,39 +421,69 @@
     function showReading() {
       userName = document.getElementById("nameInput").value;
       userDateOfBirth = document.getElementById("dobInput").value
-      if (selectedSpread == 'questionToTheCards') {
-        userQuestion = document.getElementById("inputFieldsQuestion").value
+      var isUserNameFilled = true
+      var isDateOfBirthFilled = true
+      var isQuestionAsked = true
+
+      if (userName.trim() === "") {
+        document.getElementById("nameInput").style.border = '1px solid black';
+        isUserNameFilled = false
+      } else {
+        document.getElementById("nameInput").style.border = 'none';
+        isUserNameFilled = true
       }
-      hideMoreUserDetails()
 
-      readingContainer = document.getElementById('readingContainer')
-      readingContainer.style.display = 'flex'
+      if ((isUserNameFilled === true) && (userDateOfBirth.trim() === "")) {
+        document.getElementById("dobInput").style.border = '1px solid black'
+        isDateOfBirthFilled = false
+      } else {
+        document.getElementById("dobInput").style.border = 'none'
+        isDateOfBirthFilled = true
+      }
 
-      document.querySelectorAll('.reading-details-container').forEach(readingDetailsContainer => {
-        readingDetailsContainer.style.display = 'block'
-      })
-      readingTitle = document.getElementById('readingTitle')
-      readingTitle.textContent = readingTitles[selectedSpread]
-      readingTitle.style.display = 'flex'
-      readingTitle.style.fontSize = '24pt'
-      readingTitle.style.width = '90%'
+      if (selectedSpread == 'questionToTheCards') {
+        userQuestion = document.getElementById("textInput").value
+        if (userQuestion.trim() === "") {
+          document.getElementById("textInput").style.border = '1px solid black'
+          isQuestionAsked = false
+        } else {
+          document.getElementById("textInput").style.border = 'none'
+          isQuestionAsked = true
+        }
+      }
+      
+      if ((isDateOfBirthFilled === true) && (isUserNameFilled === true) && (isQuestionAsked === true)) {
+        hideMoreUserDetails()
 
-      readingDetailsSubtitle = document.getElementById('readingDetailsSubtitle')
-      const subtitleText = document.createTextNode('Hello ' + userName + '! Let\'s interpret the cards you\'ve drawn.')
-      readingDetailsSubtitle.appendChild(subtitleText)
-      readingDetailsSubtitle.style.display = 'flex'
-      readingDetailsSubtitle.style.fontSize = '16pt'
-      readingDetailsSubtitle.style.width = '90%'
+        readingContainer = document.getElementById('readingContainer')
+        readingContainer.style.display = 'flex'
 
-      readingDetail = document.getElementById('readingDetails')
-      const reading = document.createTextNode('Blah blahblah blah blahbalh blah balah balhdhvch hschfsv scjsvjs nbfhbed dh hdbfbfh hssnndzzn ndcndb')
-      readingDetail.appendChild(reading);
-      readingDetail.style.display = 'flex'
-      readingDetail.style.fontSize = '16pt'
-      readingDetail.style.width = '90%'
+        document.querySelectorAll('.reading-details-container').forEach(readingDetailsContainer => {
+          readingDetailsContainer.style.display = 'block'
+        })
+        readingTitle = document.getElementById('readingTitle')
+        readingTitle.textContent = readingTitles[selectedSpread]
+        readingTitle.style.display = 'flex'
+        readingTitle.style.fontSize = '24pt'
+        readingTitle.style.width = '90%'
 
-      shareButton = document.getElementById('shareButton')
-      shareButton.style.display = 'block'
+        readingDetailsSubtitle = document.getElementById('readingDetailsSubtitle')
+        const subtitleText = document.createTextNode('Hello ' + userName + '! Let\'s interpret the cards you\'ve drawn.')
+        readingDetailsSubtitle.appendChild(subtitleText)
+        readingDetailsSubtitle.style.display = 'flex'
+        readingDetailsSubtitle.style.fontSize = '16pt'
+        readingDetailsSubtitle.style.width = '90%'
+
+        readingDetail = document.getElementById('readingDetails')
+        const reading = document.createTextNode('Blah blahblah blah blahbalh blah balah balhdhvch hschfsv scjsvjs nbfhbed dh hdbfbfh hssnndzzn ndcndb Blah blahblah blah blahbalh blah balah balhdhvch hschfsv scjsvjs nbfhbed dh hdbfbfh hssnndzzn ndcndb Blah blahblah blah blahbalh blah balah balhdhvch hschfsv scjsvjs nbfhbed dh hdbfbfh hssnndzzn ndcndb Blah blahblah blah blahbalh blah balah balhdhvch hschfsv scjsvjs nbfhbed dh hdbfbfh hssnndzzn ndcndb Blah blahblah blah blahbalh blah balah balhdhvch hschfsv scjsvjs nbfhbed dh hdbfbfh hssnndzzn ndcndb Blah blahblah blah blahbalh blah balah balhdhvch hschfsv scjsvjs nbfhbed dh hdbfbfh hssnndzzn ndcndb Blah blahblah blah blahbalh blah balah balhdhvch hschfsv scjsvjs nbfhbed dh hdbfbfh hssnndzzn ndcndb Blah blahblah blah blahbalh blah balah balhdhvch hschfsv scjsvjs nbfhbed dh hdbfbfh hssnndzzn ndcndb Blah blahblah blah blahbalh blah balah balhdhvch hschfsv scjsvjs nbfhbed dh hdbfbfh hssnndzzn ndcndb Blah blahblah blah blahbalh blah balah balhdhvch hschfsv scjsvjs nbfhbed dh hdbfbfh hssnndzzn ndcndb')
+        readingDetail.appendChild(reading);
+        readingDetail.style.display = 'flex'
+        readingDetail.style.fontSize = '16pt'
+        readingDetail.style.width = '90%'
+        shareButton = document.getElementById('shareButton')
+        shareButton.style.display = 'block'
+
+      }
 
     }
 
