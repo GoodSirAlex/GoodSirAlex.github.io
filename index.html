@@ -321,8 +321,6 @@
     }
 
     const mainButton = window.Telegram.WebApp.MainButton;
-    // mainButton.onClick(handleMainButtonClick())
-
 
     var selectedSpread = 'questionToTheCards'
     var userName = ''
@@ -503,8 +501,9 @@
         // shareButton = document.getElementById('shareButton')
         // shareButton.style.display = 'block'
 
-        mainButton.text = "Share";
-        // mainButton.onClick(shareOnTelegram())
+        mainButton.onClick(function(){
+          shareOnTelegram();
+        })
       }
 
     }
@@ -577,12 +576,6 @@
       } else {
           // Telegram Mini App API not available
           console.error("Telegram Mini App API is not available.");
-      }
-    }
-
-    function handleMainButtonClick() {
-      if (mainButton.text === 'Do a spread for x magic gem') {
-        showMoreUserDetails()
       }
     }
 
