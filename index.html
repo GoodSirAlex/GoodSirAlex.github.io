@@ -323,7 +323,19 @@
       'career': 'What are my career prospects?'
     }
 
-    const mainButton = window.Telegram.WebApp.MainButton;
+    const doSpreadButton = window.Telegram.WebApp.MainButton;
+    doSpreadButton.text = "Do a spread for x magic gem";
+    doSpreadButton.onClick(function(){
+      showMoreUserDetails();
+    })
+
+
+    const shareButton = window.Telegram.WebApp.MainButton;
+    shareButton.text = "Get a reading";
+    shareButton.onClick(function(){
+      showReading();
+    })
+
 
     var selectedSpread = 'questionToTheCards'
     var userName = ''
@@ -369,13 +381,8 @@
       // doSpreadButton = document.getElementById('doSpreadButton')
       // doSpreadButton.style.display = 'block'
 
-      mainButton.text = "Do a spread for x magic gem";
-      mainButton.enable();
-      mainButton.show();
-
-      mainButton.onClick(function(){
-        showMoreUserDetails();
-      })
+      doSpreadButton.enable();
+      doSpreadButton.show();
 
       selectedSpread = buttonName
 
@@ -392,8 +399,8 @@
 
     function showMoreUserDetails() {
 
-        mainButton.offClick()
-        mainButton.disable()
+      doSpreadButton.disable()
+      doSpreadButton.hide()
 
         hideSpreadDetails()
 
@@ -415,10 +422,10 @@
         // getButton = document.getElementById('questionToTheCardReadingButton')
         // getButton.style.display = 'block'
 
-        mainButton.text = "Get a reading";
-        mainButton.enable();
-        // mainButton.onClick(showReading())
-        mainButton.onClick(function(){
+        shareButton.text = "Get a reading";
+        shareButton.enable();
+        shareButton.show()
+        shareButton.onClick(function(){
           showReading();
         })
     }
