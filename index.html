@@ -73,6 +73,17 @@
         height: 140px;
     }
 
+    .spread-details-container {
+        display: none;
+        justify-content: center;
+    }
+
+    .spread-details {
+      color: white;
+      width: 80%;
+      margin: 0 auto
+    }
+
     input {
         margin: 10px;
         padding: 20px;
@@ -108,7 +119,7 @@
     .fixed-button-container {
       position: fixed;
       bottom: 20px;
-      width: 100%; /* Full width */
+      width: 100%;
     }
 
     .fixed-button {
@@ -123,19 +134,57 @@
       display: none;
     }
 
+    .reading-container {
+      display: none;
+      justify-content: space-between;
+      width: 90%;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .reading-details-container {
+        display: none;
+        justify-content: center;
+    }
+    
+    .image-column {
+      flex: 1;
+      padding: 10px;
+      padding-left: 0px;
+      box-sizing: border-box;
+    }
+    
+    .image-column img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
     body {
       background-color: rgb(9, 14, 18);
-      margin: 0; /* Remove default body margin */
-      padding: 0; /* Remove default body padding */
+      margin: 0;
+      padding: 0;
     }
 
     h1 {
       font-size: 16px;
       font-weight: 400;
       color: white;
-      width: 300px;
+      width: 80%;
+      padding: 20px;
       margin: 0 auto;
       margin-top: 20px;
+      display: none;
+    }
+
+    h2 {
+      font-size: 14px;
+      font-weight: 400;
+      color: white;
+      width: 80%;
+      padding: 20px;
+      margin: 0 auto;
       margin-bottom: 10px;
       display: none;
     }
@@ -161,73 +210,251 @@
         <label style="color: white; margin-bottom: 10px; margin-left: 10px; font-size: 14pt;">Magic gems</label>
         <button class="energy-button">Top up</button>
     </div>
-</div>
+  </div>
   <div class="button-container-title" id="buttonContainerTitle" style="display: flex; margin: 0 auto; justify-content: center;">
-    <h1 style="display: inline-block;">Spreads</h1>
+    <h1 style="display: inline-block; width: 300px;">Spreads</h1>
   </div>
   <div class="button-container">
     <div class="button-column">
       <div>
-        <button class="menu-button" onclick="showFields('name1')">Question to the cards</button>
+        <button class="menu-button" onclick="showSpreadDetails('questionToTheCards')">Question to the cards</button>
       </div>
       <div>
-        <button class="menu-button" onclick="showFields('name1')">Relationships</button>
+        <button class="menu-button" onclick="showSpreadDetails('relationships')">Relationships</button>
       </div>
       <div>
-        <button class="menu-button" onclick="showFields('name1')">Future Partner</button>
+        <button class="menu-button" onclick="showSpreadDetails('futurePartner')">Future Partner</button>
       </div>
         
     </div>
     <div class="button-column">
       <div>
-        <button class="menu-button" onclick="showFields('name1')">Tomorrow</button>
+        <button class="menu-button" onclick="showSpreadDetails('tomorrow')">Tomorrow</button>
       </div>
       <div>
-        <button class="menu-button" onclick="showFields('name1')">Career</button>
+        <button class="menu-button" onclick="showSpreadDetails('career')">Career</button>
       </div>  
     </div>
   </div>
+  <div class="spread-details-container">
+    <h1 id="spread"></h1>
+    <h2 id="spreadPrice"></h2>
+    <div class="spread-details" id="spreadDetails" style="color: white;"></div>
+  </div>
   <div>
-    <h1 id="questionToTheCardTitle">ENTER YOUR NAME AND DATE OF BIRTH</h1>
+    <h1 id="NameAndDateOfBirthTitle">ENTER YOUR NAME AND DATE OF BIRTH</h1>
     <div id="inputFields" class="input-fields">
       <input type="text" id="nameInput" placeholder="Your name" style="margin-bottom: 0px; border-bottom: 1px solid #333; max-height: 60px;">
       <input type="date" id="dobInput" onfocus="this.type='date';this.focus();" onblur="if(this.value == '') this.type='text';" placeholder="dd.mm.yyyy" style="margin-top: 0px; max-height: 60px;">
     </div>
     <h1 id="questionToTheCardTitle">YOUR QUESTION TO THE TAROT CARDS</h1>
-    <div id="inputFields" class="input-fields">
+    <div id="inputFieldsQuestion" class="input-fields">
       <textarea id="textInput"></textarea>
     </div>
   </div>
 
+  <div class="reading-container" id="readingContainer">
+    <div class="image-column">
+      <img src="cards/1.jpeg" alt="Image 1">
+    </div>
+    <div class="image-column">
+      <img src="cards/2.jpeg" alt="Image 2">
+    </div>
+    <div class="image-column">
+      <img src="cards/3.jpeg" alt="Image 3">
+    </div>
+  </div>
+  <div class="reading-details-container">
+    <h1 id="readingTitle"></h1>
+    <div class="reading-details-subtitle" id="readingDetailsSubtitle" style="color: white; margin: 0 auto; margin-bottom: 20px;"></div>
+    <div class="reding-details" id="readingDetails" style="color: white; margin: 0 auto;"></div>
+  </div>
+
+
+
   <div class="fixed-button-container">
-    <button class="fixed-button" id="questionToTheCardReadingButton">Get a reading</button>
+    <button class="fixed-button" id="questionToTheCardReadingButton" onclick="showReading()">Get a reading</button>
+  </div>
+
+  <div class="fixed-button-container">
+    <button class="fixed-button" id="doSpreadButton" onclick="showMoreUserDetails()">Do a spread for x magic gems</button>
+  </div>
+
+  <div class="fixed-button-container">
+    <button class="fixed-button" id="shareButton" onclick="showMoreUserDetails()">Share</button>
   </div>
 
 
   <script>
+    let spreadQuestions = {
+      'questionToTheCards': 'Ask your question to the tarot cards',
+      'relationships': 'How does my partner feel about me?',
+      'futurePartner': 'What will my future partner be like?',
+      'tomorrow': 'How will my tomorrow go?',
+      'career': 'What are my career prospects?'
+    }
+
+    let spreadPrices = {
+      'questionToTheCards': 'Price: 3 💎',
+      'relationships': 'Price: 5 💎',
+      'futurePartner': 'Price: 5 💎',
+      'tomorrow': 'Price: 3 💎',
+      'career': 'Price: 5 💎'
+    }
+
+    let spreadDetails = {
+      'questionToTheCards': 'This question is perfect for blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah',
+      'relationships': 'This question is perfect for blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah',
+      'futurePartner': 'This question is perfect for blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah',
+      'tomorrow': 'This question is perfect for blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah',
+      'career': 'This question is perfect for blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah',
+    }
+
+    let readingTitles = {
+      'questionToTheCards': 'Question to the cards: ',
+      'relationships': 'How does my partner feel about me?',
+      'futurePartner': 'What will my future partner be like?',
+      'tomorrow': 'How will my tomorrow go?',
+      'career': 'What are my career prospects?'
+    }
+
+    var selectedSpread = 'questionToTheCards'
+    var userName = ''
+    var userDateOfBirth = ''
+    var userQuestion = ''
+
     let selectedCards = [];
 
-    function showFields(buttonName) {
-        mainContainer = document.getElementById('mainContainer')
-        mainContainer.style.display = 'none'
+    function hideMenu() {
+      mainContainer = document.getElementById('mainContainer')
+      mainContainer.style.display = 'none'
 
-        // backButton = document.getElementById('backButton')
-        // backButton.style.display = 'block'
+      buttonContainerTitle = document.getElementById('buttonContainerTitle')
+      buttonContainerTitle.style.display = 'none'
 
-        buttonContainerTitle = document.getElementById('buttonContainerTitle')
-        buttonContainerTitle.style.display = 'none'
+      document.querySelectorAll('.menu-button').forEach(button => {
+          button.style.display = 'none';
+      });
+    }
 
-        document.querySelectorAll('.menu-button').forEach(button => {
-            button.style.display = 'none';
-        });
+    function showSpreadDetails(buttonName) {
+      hideMenu()
+
+      document.querySelectorAll('.spread-details-container').forEach(spreadDetailsContainer => {
+        spreadDetailsContainer.style.display = 'block'
+      })
+      spreadTitle = document.getElementById('spread')
+      spreadTitle.textContent = spreadQuestions[buttonName]
+      spreadTitle.style.display = 'flex'
+      spreadTitle.style.fontSize = '24pt'
+
+      spreadPrice = document.getElementById('spreadPrice')
+      spreadPrice.textContent = spreadPrices[buttonName]
+      spreadPrice.style.display = 'flex'
+      spreadPrice.style.fontSize = '18pt'
+
+      spreadDetail = document.getElementById('spreadDetails')
+      const spreadDetailsText = document.createTextNode(spreadDetails[buttonName]);
+      spreadDetail.appendChild(spreadDetailsText);
+      spreadDetail.style.display = 'flex'
+      spreadDetail.style.fontSize = '16pt'
+
+      doSpreadButton = document.getElementById('doSpreadButton')
+      doSpreadButton.style.display = 'block'
+
+      selectedSpread = buttonName
+
+    }
+
+    function hideSpreadDetails() {
+      document.querySelectorAll('.spread-details-container').forEach(inputField => {
+          inputField.style.display = 'none'
+      })
+
+      doSpreadButton = document.getElementById('doSpreadButton')
+      doSpreadButton.style.display = 'none'
+    }
+
+    function showMoreUserDetails() {
+
+        hideSpreadDetails()
+
         document.querySelectorAll('#inputFields').forEach(inputField => {
             inputField.style.display = 'flex'
         })
-        document.querySelectorAll('#questionToTheCardTitle').forEach(titleField => {
+        document.querySelectorAll('#NameAndDateOfBirthTitle').forEach(titleField => {
             titleField.style.display = 'flex'
         })
+        if (selectedSpread == 'questionToTheCards') {
+          document.querySelectorAll('#questionToTheCardTitle').forEach(titleField => {
+            titleField.style.display = 'flex'
+          })
+          document.querySelectorAll('#inputFieldsQuestion').forEach(inputField => {
+            inputField.style.display = 'flex'
+          })
+        }
+
         getButton = document.getElementById('questionToTheCardReadingButton')
         getButton.style.display = 'block'
+    }
+
+    function hideMoreUserDetails() {
+      document.querySelectorAll('#inputFields').forEach(inputField => {
+          inputField.style.display = 'none'
+      })
+      document.querySelectorAll('#NameAndDateOfBirthTitle').forEach(titleField => {
+          titleField.style.display = 'none'
+      })
+      if (selectedSpread == 'questionToTheCards') {
+        document.querySelectorAll('#questionToTheCardTitle').forEach(titleField => {
+          titleField.style.display = 'none'
+        })
+        document.querySelectorAll('#inputFieldsQuestion').forEach(inputField => {
+          inputField.style.display = 'none'
+        })
+      }
+
+      getButton = document.getElementById('questionToTheCardReadingButton')
+      getButton.style.display = 'none'
+    }
+
+    function showReading() {
+      userName = document.getElementById("nameInput").value;
+      userDateOfBirth = document.getElementById("dobInput").value
+      if (selectedSpread == 'questionToTheCards') {
+        userQuestion = document.getElementById("inputFieldsQuestion").value
+      }
+      hideMoreUserDetails()
+
+      readingContainer = document.getElementById('readingContainer')
+      readingContainer.style.display = 'flex'
+
+      document.querySelectorAll('.reading-details-container').forEach(readingDetailsContainer => {
+        readingDetailsContainer.style.display = 'block'
+      })
+      readingTitle = document.getElementById('readingTitle')
+      readingTitle.textContent = readingTitles[selectedSpread]
+      readingTitle.style.display = 'flex'
+      readingTitle.style.fontSize = '24pt'
+      readingTitle.style.width = '90%'
+
+      readingDetailsSubtitle = document.getElementById('readingDetailsSubtitle')
+      const subtitleText = document.createTextNode('Hello ' + userName + '! Let\'s interpret the cards you\'ve drawn.')
+      readingDetailsSubtitle.appendChild(subtitleText)
+      readingDetailsSubtitle.style.display = 'flex'
+      readingDetailsSubtitle.style.fontSize = '16pt'
+      readingDetailsSubtitle.style.width = '90%'
+
+      readingDetail = document.getElementById('readingDetails')
+      const reading = document.createTextNode('Blah blahblah blah blahbalh blah balah balhdhvch hschfsv scjsvjs nbfhbed dh hdbfbfh hssnndzzn ndcndb')
+      readingDetail.appendChild(reading);
+      readingDetail.style.display = 'flex'
+      readingDetail.style.fontSize = '16pt'
+      readingDetail.style.width = '90%'
+
+      shareButton = document.getElementById('shareButton')
+      shareButton.style.display = 'block'
+
     }
 
     function showMainMenu() {
@@ -238,8 +465,15 @@
       document.querySelectorAll('.back-button').forEach(backButton => {
           backButton.style.display = 'none';
       });
+      
       document.querySelectorAll('#inputFields').forEach(inputField => {
             inputField.style.display = 'none'
+      })
+      document.querySelectorAll('#inputFieldsQuestion').forEach(inputField => {
+            inputField.style.display = 'none'
+      })
+      document.querySelectorAll('#NameAndDateOfBirthTitle').forEach(titleField => {
+          titleField.style.display = 'none'
       })
       document.querySelectorAll('#questionToTheCardTitle').forEach(titleField => {
           titleField.style.display = 'none'
@@ -270,124 +504,6 @@
         }
     });
 
-    function handleButtonClick(button) {
-      if (selectedCards.length >= 6 && !button.classList.contains('highlight')) {
-        alert('You cannot select more than 6 cards.');
-        return;
-      }
-
-      // Highlight the clicked button
-      button.classList.toggle('highlight');
-
-      // Toggle card in selectedCards array
-      const cardId = parseInt(button.getAttribute('data-id'));
-      const index = selectedCards.indexOf(cardId);
-      if (index === -1) {
-        selectedCards.push(cardId);
-        var image = button.querySelector('img')
-        image.src= 'cards/back_selected.png'
-      } else {
-        selectedCards.splice(index, 1);
-        var image = button.querySelector('img')
-        image.src= 'cards/back.png'
-      }
-
-      // Toggle continue button visibility
-      const continueButton = document.getElementById('continueButton');
-      continueButton.style.display = selectedCards.length >= 6 ? 'block' : 'none';
-
-      // Print the IDs of selected cards to the console
-      console.log(selectedCards);
-    }
-
-    function getRandomNumber(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-
-    function showSelectedCards() {
-      const selectedCardsContainer = document.getElementById('selectedCardsContainer');
-
-      // Clear existing content
-      selectedCardsContainer.innerHTML = '';
-
-      // Show the selected cards container
-      selectedCardsContainer.classList.add('show');
-
-      // Create a container for selected cards
-      const cardContainer = document.createElement('div');
-      cardContainer.classList.add('card-container');
-
-      // Populate the card container with selected cards
-      let card_idx = 0
-      let cardTitles = [
-        'How you feel about yourself',
-        'What you want most right now',
-        'Your fears',
-        'What is going for you',
-        'What is going against you',
-        'The likely outcome',
-      ]
-
-      var randomCards = [];
-      var selectedNumbers = new Set(); // Using a Set to keep track of selected numbers
-
-      // Generate 6 random values without repeating
-      while (randomCards.length < 6) {
-          var randomNumber = getRandomNumber(1, 22);
-          if (!selectedNumbers.has(randomNumber)) {
-              selectedNumbers.add(randomNumber);
-              randomCards.push(randomNumber);
-          }
-      }
-
-
-
-      selectedCards.forEach(cardId => {
-        const cardTitle = document.createElement('div');
-        cardTitle.classList.add('card-title');
-        cardTitle.textContent = 'Card ' + (card_idx + 1) + ': ' + cardTitles[card_idx];
-        cardContainer.appendChild(cardTitle);
-
-        const card = document.createElement('div');
-        card.classList.add('card');
-        card.textContent = cardId;
-
-        const card_image = document.createElement('img');
-        card_image.src = 'cards/' + String(randomCards[card_idx]) + '.jpeg'
-        card_image.style.width = '200px';
-        card_image.style.height = '312px';
-        card.appendChild(card_image)
-        cardContainer.appendChild(card);
-
-        card_idx += 1
-      });
-
-      // Append the card container to the selected cards container
-      selectedCardsContainer.appendChild(cardContainer);
-
-
-      // Hide the cards row
-      selectedCardsContainer.querySelectorAll('.card').forEach(card => {
-        card.style.position = 'relative';
-        card.style.transform = 'none';
-        card.style.margin = '0 auto';
-        card.style.width = '200px !important';
-        card.style.height = '312px !important';
-        card.style.minWidth = '200px';
-        card.style.maxWidth = '200px';
-        card.style.maxHeight = '312px'
-        card.style.marginBottom = '60px'
-      });
-
-      document.querySelectorAll('.cards-row').forEach(cardsRow => {
-        cardsRow.style.display = 'none';
-      });
-      const title = document.querySelector('#title');
-      title.style.display = 'none';
-      const continueButton = document.querySelector('#continueButton');
-      continueButton.style.display = 'none';
-    }
   </script>
 </body>
 </html>
