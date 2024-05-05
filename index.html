@@ -329,11 +329,17 @@
       showMoreUserDetails();
     })
 
+    const showReadingButton = window.Telegram.WebApp.MainButton;
+    showReadingButton.text = "Get a reading";
+    showReadingButton.onClick(function(){
+      showReading();
+    })
+
 
     const shareButton = window.Telegram.WebApp.MainButton;
-    shareButton.text = "Get a reading";
+    shareButton.text = "Share";
     shareButton.onClick(function(){
-      showReading();
+      shareOnTelegram();
     })
 
 
@@ -422,12 +428,8 @@
         // getButton = document.getElementById('questionToTheCardReadingButton')
         // getButton.style.display = 'block'
 
-        shareButton.text = "Get a reading";
-        shareButton.enable();
-        shareButton.show()
-        shareButton.onClick(function(){
-          showReading();
-        })
+        showReadingButton.enable();
+        showReadingButton.show()
     }
 
     function hideMoreUserDetails() {
@@ -451,40 +453,41 @@
     }
 
     function showReading() {
-      mainButton.offClick()
-      mainButton.disable()
+      showReadingButton.disable()
+      showReadingButton.hide()
+  
       userName = document.getElementById("nameInput").value;
       userDateOfBirth = document.getElementById("dobInput").value
       var isUserNameFilled = true
       var isDateOfBirthFilled = true
       var isQuestionAsked = true
 
-      // if (userName.trim() === "") {
-      //   document.getElementById("nameInput").style.border = '1px solid black';
-      //   isUserNameFilled = false
-      // } else {
-      //   document.getElementById("nameInput").style.border = 'none';
-      //   isUserNameFilled = true
-      // }
+      if (userName.trim() === "") {
+        document.getElementById("nameInput").style.border = '1px solid black';
+        isUserNameFilled = false
+      } else {
+        document.getElementById("nameInput").style.border = 'none';
+        isUserNameFilled = true
+      }
 
-      // if ((isUserNameFilled === true) && (userDateOfBirth.trim() === "")) {
-      //   document.getElementById("dobInput").style.border = '1px solid black'
-      //   isDateOfBirthFilled = false
-      // } else {
-      //   document.getElementById("dobInput").style.border = 'none'
-      //   isDateOfBirthFilled = true
-      // }
+      if ((isUserNameFilled === true) && (userDateOfBirth.trim() === "")) {
+        document.getElementById("dobInput").style.border = '1px solid black'
+        isDateOfBirthFilled = false
+      } else {
+        document.getElementById("dobInput").style.border = 'none'
+        isDateOfBirthFilled = true
+      }
 
-      // if (selectedSpread == 'questionToTheCards') {
-      //   userQuestion = document.getElementById("textInput").value
-      //   if (userQuestion.trim() === "") {
-      //     document.getElementById("textInput").style.border = '1px solid black'
-      //     isQuestionAsked = false
-      //   } else {
-      //     document.getElementById("textInput").style.border = 'none'
-      //     isQuestionAsked = true
-      //   }
-      // }
+      if (selectedSpread == 'questionToTheCards') {
+        userQuestion = document.getElementById("textInput").value
+        if (userQuestion.trim() === "") {
+          document.getElementById("textInput").style.border = '1px solid black'
+          isQuestionAsked = false
+        } else {
+          document.getElementById("textInput").style.border = 'none'
+          isQuestionAsked = true
+        }
+      }
       
       if ((isDateOfBirthFilled === true) && (isUserNameFilled === true) && (isQuestionAsked === true)) {
         hideMoreUserDetails()
@@ -517,10 +520,8 @@
         // shareButton = document.getElementById('shareButton')
         // shareButton.style.display = 'block'
 
-        mainButton.text = 'Share'
-        mainButton.onClick(function(){
-          shareOnTelegram();
-        })
+        shareButton.enable()
+        shareButton.show()
       }
 
     }
