@@ -370,6 +370,8 @@
       mainButton.enable();
       mainButton.show();
 
+      mainButton.onClick(showMoreUserDetails())
+
       selectedSpread = buttonName
 
     }
@@ -406,6 +408,7 @@
         // getButton.style.display = 'block'
 
         mainButton.text = "Get a reading";
+        mainButton.onClick(showReading())
     }
 
     function hideMoreUserDetails() {
@@ -494,7 +497,7 @@
         // shareButton.style.display = 'block'
 
         mainButton.text = "Share";
-
+        mainButton.onClick(shareOnTelegram())
       }
 
     }
