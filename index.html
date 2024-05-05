@@ -323,15 +323,15 @@
       'career': 'What are my career prospects?'
     }
 
-    const doSpreadButton = window.Telegram.WebApp.MainButton;
-    doSpreadButton.text = "Do a spread for x magic gem";
+    const mainButton = window.Telegram.WebApp.MainButton;
+    mainButton.text = "Do a spread for x magic gem";
 
-    const showReadingButton = window.Telegram.WebApp.MainButton;
-    showReadingButton.text = "Get a reading";
+    // const showReadingButton = window.Telegram.WebApp.MainButton;
+    // showReadingButton.text = "Get a reading";
 
 
-    const shareButton = window.Telegram.WebApp.MainButton;
-    shareButton.text = "Share";
+    // const shareButton = window.Telegram.WebApp.MainButton;
+    // shareButton.text = "Share";
 
 
     var selectedSpread = 'questionToTheCards'
@@ -378,13 +378,13 @@
       // doSpreadButton = document.getElementById('doSpreadButton')
       // doSpreadButton.style.display = 'block'
 
-      doSpreadButton.enable();
-      doSpreadButton.show();
-      doSpreadButton.onClick(function(){
-        showMoreUserDetails();
+      mainButton.enable();
+      mainButton.show();
+      mainButton.onClick(function(){
+        handleMainButtonClick();
       })
-      doSpreadButton.offClick(function(){
-        showMoreUserDetails();
+      mainButton.offClick(function(){
+        handleMainButtonClick();
       })
 
       selectedSpread = buttonName
@@ -425,14 +425,15 @@
         // getButton = document.getElementById('questionToTheCardReadingButton')
         // getButton.style.display = 'block'
 
-        showReadingButton.enable();
-        showReadingButton.show()
-        showReadingButton.onClick(function(){
-          showReading();
-        })
-        showReadingButton.offClick(function(){
-          showReading();
-        })
+        // showReadingButton.enable();
+        // showReadingButton.show()
+        // showReadingButton.onClick(function(){
+        //   showReading();
+        // })
+        // showReadingButton.offClick(function(){
+        //   showReading();
+        // })
+        mainButton.text = 'Get a reading'
     }
 
     function hideMoreUserDetails() {
@@ -523,14 +524,15 @@
         // shareButton = document.getElementById('shareButton')
         // shareButton.style.display = 'block'
 
-        shareButton.enable()
-        shareButton.show()
-        shareButton.onClick(function(){
-          shareOnTelegram();
-        })
-        shareButton.offClick(function(){
-          shareOnTelegram();
-        })
+        // shareButton.enable()
+        // shareButton.show()
+        // shareButton.onClick(function(){
+        //   shareOnTelegram();
+        // })
+        // shareButton.offClick(function(){
+        //   shareOnTelegram();
+        // })
+        mainButton.text = 'Share'
       }
 
     }
@@ -603,6 +605,14 @@
       } else {
           // Telegram Mini App API not available
           console.error("Telegram Mini App API is not available.");
+      }
+    }
+
+    function handleMainButtonClick() {
+      if (mainButton.text === 'Do a spread for x magic gems') {
+        showMoreUserDetails()
+      } else if (mainButton.text === 'Get a reading') {
+        showReading()
       }
     }
 
