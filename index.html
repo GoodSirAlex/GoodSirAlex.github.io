@@ -389,6 +389,8 @@
 
     function showMoreUserDetails() {
 
+        mainButton.disable()
+
         hideSpreadDetails()
 
         document.querySelectorAll('#inputFields').forEach(inputField => {
@@ -410,6 +412,7 @@
         // getButton.style.display = 'block'
 
         mainButton.text = "Get a reading";
+        mainButton.enable();
         // mainButton.onClick(showReading())
         mainButton.onClick(function(){
           showReading();
@@ -437,6 +440,7 @@
     }
 
     function showReading() {
+      mainButton.disable()
       userName = document.getElementById("nameInput").value;
       userDateOfBirth = document.getElementById("dobInput").value
       var isUserNameFilled = true
