@@ -272,21 +272,6 @@
     <div class="reding-details" id="readingDetails" style="color: white; margin: 0 auto;"></div>
   </div>
 
-
-
-  <!-- <div class="fixed-button-container">
-    <button class="fixed-button" id="questionToTheCardReadingButton" onclick="showReading()">Get a reading</button>
-  </div>
-
-  <div class="fixed-button-container">
-    <button class="fixed-button" id="doSpreadButton" onclick="showMoreUserDetails()">Do a spread for x magic gems</button>
-  </div>
-
-  <div class="fixed-button-container">
-    <button class="fixed-button" id="shareButton" onclick="shareOnTelegram()">Share</button>
-  </div> -->
-
-
   <script>
     Telegram.WebApp.ready();
     Telegram.WebApp.expand();
@@ -325,14 +310,6 @@
 
     const mainButton = window.Telegram.WebApp.MainButton;
     mainButton.text = "Do a spread for x magic gems";
-
-    // const showReadingButton = window.Telegram.WebApp.MainButton;
-    // showReadingButton.text = "Get a reading";
-
-
-    // const shareButton = window.Telegram.WebApp.MainButton;
-    // shareButton.text = "Share";
-
 
     var selectedSpread = 'questionToTheCards'
     var userName = ''
@@ -451,15 +428,10 @@
           inputField.style.display = 'none'
         })
       }
-
-      // getButton = document.getElementById('questionToTheCardReadingButton')
-      // getButton.style.display = 'none'
     }
 
     function showReading() {
-      // showReadingButton.disable()
-      // showReadingButton.hide()
-  
+
       userName = document.getElementById("nameInput").value;
       userDateOfBirth = document.getElementById("dobInput").value
       var isUserNameFilled = true
@@ -521,17 +493,6 @@
         readingDetail.style.display = 'flex'
         readingDetail.style.fontSize = '16pt'
         readingDetail.style.width = '90%'
-        // shareButton = document.getElementById('shareButton')
-        // shareButton.style.display = 'block'
-
-        // shareButton.enable()
-        // shareButton.show()
-        // shareButton.onClick(function(){
-        //   shareOnTelegram();
-        // })
-        // shareButton.offClick(function(){
-        //   shareOnTelegram();
-        // })
         mainButton.text = 'Share'
       }
 
@@ -609,7 +570,6 @@
     }
 
     function handleMainButtonClick() {
-      Telegram.WebApp.showAlert(mainButton.text)
       if (mainButton.text === 'Do a spread for x magic gems') {
         showMoreUserDetails()
       } else if (mainButton.text === 'Get a reading') {
