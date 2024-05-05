@@ -281,7 +281,7 @@
   </div>
 
   <div class="fixed-button-container">
-    <button class="fixed-button" id="shareButton" onclick="showMoreUserDetails()">Share</button>
+    <button class="fixed-button" id="shareButton" onclick="shareOnTelegram()">Share</button>
   </div>
 
 
@@ -503,6 +503,30 @@
             }
         }
     });
+
+    function shareOnTelegram() {
+    // Check if Telegram Mini App API is available
+    if (window.TG !== undefined) {
+        // Define the content to share
+        const content = {
+            text: "Check out this awesome content!",
+            url: "https://example.com",
+            // Add any other relevant parameters such as media, etc.
+        };
+
+        // Use the API to share content
+        window.TG.Share.share(content)
+            .then(() => {
+                console.log("Shared successfully!");
+            })
+            .catch((error) => {
+                console.error("Error sharing:", error);
+            });
+    } else {
+        // Telegram Mini App API not available
+        console.error("Telegram Mini App API is not available.");
+    }
+}
 
   </script>
 </body>
