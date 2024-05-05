@@ -389,6 +389,7 @@
 
     function showMoreUserDetails() {
 
+        mainButton.offClick()
         mainButton.disable()
 
         hideSpreadDetails()
@@ -440,6 +441,7 @@
     }
 
     function showReading() {
+      mainButton.offClick()
       mainButton.disable()
       userName = document.getElementById("nameInput").value;
       userDateOfBirth = document.getElementById("dobInput").value
