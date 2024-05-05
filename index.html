@@ -321,7 +321,7 @@
     }
 
     const mainButton = window.Telegram.WebApp.MainButton;
-    mainButton.onClick(handleMainButtonClick())
+    // mainButton.onClick(handleMainButtonClick())
 
 
     var selectedSpread = 'questionToTheCards'
@@ -372,6 +372,10 @@
       mainButton.enable();
       mainButton.show();
 
+      mainButton.onClick(function(){
+        showMoreUserDetails();
+      })
+
       selectedSpread = buttonName
 
     }
@@ -409,6 +413,9 @@
 
         mainButton.text = "Get a reading";
         // mainButton.onClick(showReading())
+        mainButton.onClick(function(){
+          showReading();
+        })
     }
 
     function hideMoreUserDetails() {
