@@ -325,22 +325,13 @@
 
     const doSpreadButton = window.Telegram.WebApp.MainButton;
     doSpreadButton.text = "Do a spread for x magic gem";
-    doSpreadButton.onClick(function(){
-      showMoreUserDetails();
-    })
 
     const showReadingButton = window.Telegram.WebApp.MainButton;
     showReadingButton.text = "Get a reading";
-    showReadingButton.onClick(function(){
-      showReading();
-    })
 
 
     const shareButton = window.Telegram.WebApp.MainButton;
     shareButton.text = "Share";
-    shareButton.onClick(function(){
-      shareOnTelegram();
-    })
 
 
     var selectedSpread = 'questionToTheCards'
@@ -389,6 +380,12 @@
 
       doSpreadButton.enable();
       doSpreadButton.show();
+      doSpreadButton.onClick(function(){
+        showMoreUserDetails();
+      })
+      doSpreadButton.offClick(function(){
+        showMoreUserDetails();
+      })
 
       selectedSpread = buttonName
 
@@ -430,6 +427,12 @@
 
         showReadingButton.enable();
         showReadingButton.show()
+        showReadingButton.onClick(function(){
+          showReading();
+        })
+        showReadingButton.offClick(function(){
+          showReading();
+        })
     }
 
     function hideMoreUserDetails() {
@@ -522,6 +525,12 @@
 
         shareButton.enable()
         shareButton.show()
+        shareButton.onClick(function(){
+          shareOnTelegram();
+        })
+        shareButton.offClick(function(){
+          shareOnTelegram();
+        })
       }
 
     }
