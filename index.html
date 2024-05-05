@@ -443,32 +443,32 @@
       var isDateOfBirthFilled = true
       var isQuestionAsked = true
 
-      if (userName.trim() === "") {
-        document.getElementById("nameInput").style.border = '1px solid black';
-        isUserNameFilled = false
-      } else {
-        document.getElementById("nameInput").style.border = 'none';
-        isUserNameFilled = true
-      }
+      // if (userName.trim() === "") {
+      //   document.getElementById("nameInput").style.border = '1px solid black';
+      //   isUserNameFilled = false
+      // } else {
+      //   document.getElementById("nameInput").style.border = 'none';
+      //   isUserNameFilled = true
+      // }
 
-      if ((isUserNameFilled === true) && (userDateOfBirth.trim() === "")) {
-        document.getElementById("dobInput").style.border = '1px solid black'
-        isDateOfBirthFilled = false
-      } else {
-        document.getElementById("dobInput").style.border = 'none'
-        isDateOfBirthFilled = true
-      }
+      // if ((isUserNameFilled === true) && (userDateOfBirth.trim() === "")) {
+      //   document.getElementById("dobInput").style.border = '1px solid black'
+      //   isDateOfBirthFilled = false
+      // } else {
+      //   document.getElementById("dobInput").style.border = 'none'
+      //   isDateOfBirthFilled = true
+      // }
 
-      if (selectedSpread == 'questionToTheCards') {
-        userQuestion = document.getElementById("textInput").value
-        if (userQuestion.trim() === "") {
-          document.getElementById("textInput").style.border = '1px solid black'
-          isQuestionAsked = false
-        } else {
-          document.getElementById("textInput").style.border = 'none'
-          isQuestionAsked = true
-        }
-      }
+      // if (selectedSpread == 'questionToTheCards') {
+      //   userQuestion = document.getElementById("textInput").value
+      //   if (userQuestion.trim() === "") {
+      //     document.getElementById("textInput").style.border = '1px solid black'
+      //     isQuestionAsked = false
+      //   } else {
+      //     document.getElementById("textInput").style.border = 'none'
+      //     isQuestionAsked = true
+      //   }
+      // }
       
       if ((isDateOfBirthFilled === true) && (isUserNameFilled === true) && (isQuestionAsked === true)) {
         hideMoreUserDetails()
@@ -501,6 +501,7 @@
         // shareButton = document.getElementById('shareButton')
         // shareButton.style.display = 'block'
 
+        mainButton.text = 'Share'
         mainButton.onClick(function(){
           shareOnTelegram();
         })
