@@ -200,6 +200,24 @@
       background-color: white !important;
       text-align: left !important;
     }
+
+    table {
+        width: 80%;
+        border-collapse: collapse;
+        margin: 0 auto;
+    }
+    th, td {
+        color: white;
+        padding: 8px;
+        text-align: left;
+    }
+    tr:hover {
+        background-color: #f2f2f2;
+    }
+    .align-right {
+        text-align: right;
+    }
+
 </style>
 </head>
 <body>
@@ -210,7 +228,7 @@
     <div class="text-column">
         <label style="color: white; margin-top: 40px; margin-bottom: 8px; margin-left: 10px; font-size: 24pt; font-weight: bold;">3 💎</label>
         <label style="color: white; margin-bottom: 10px; margin-left: 10px; font-size: 14pt;">Magic gems</label>
-        <button class="energy-button">Top up</button>
+        <button class="energy-button" onclick="showBalance()">Top up</button>
     </div>
   </div>
   <div class="button-container-title" id="buttonContainerTitle" style="display: flex; margin: 0 auto; justify-content: center;">
@@ -238,6 +256,57 @@
       </div>  
     </div>
   </div>
+
+
+  <div class="main-container" id="energyBalanceContainer" style="display: none;">
+    <div style="display: flex; flex: 1; flex-direction: column; align-items: center; justify-content: center;">
+        <label style="color: white; margin-top: 40px; margin-bottom: 8px; margin-left: 10px; font-size: 24pt; font-weight: bold;">3 💎</label>
+        <label style="color: white; margin-bottom: 10px; margin-left: 10px; font-size: 14pt;">Magic gems</label>
+    </div>
+  </div>
+
+
+
+
+
+  <div class="invitation-container-title" id="invitationContainerTitle" style="display: none; margin: 0 auto; justify-content: center;">
+    <h1 style="display: inline-block; width: 300px; font-size: 16pt; font-weight: 600;">Get for free</h1>
+  </div>
+  <table id="invitationTable" style="display: none;">
+    <tbody style="width: 100%;">
+        <tr onclick="rowClicked(this)">
+            <td>3 💎</td>
+            <td class="align-right">For inviting a friend ></td>
+        </tr>
+    </tbody>
+  </table>
+
+  <div class="purchase-container-title" id="purchaseContainerTitle" style="display: none; margin: 0 auto; justify-content: center;">
+    <h1 style="display: inline-block; width: 300px; font-size: 16pt; font-weight: 600;">Recharge</h1>
+  </div>
+  <table id="purchaseTable" style="display: none;">
+    <tbody style="width: 100%;">
+        <tr onclick="rowClicked(this)">
+            <td>100 💎</td>
+            <td class="align-right">$15 ></td>
+        </tr>
+        <tr onclick="rowClicked(this)">
+          <td>50 💎</td>
+          <td class="align-right">$10 ></td>
+      </tr>
+      <tr onclick="rowClicked(this)">
+        <td>10 💎</td>
+        <td class="align-right">$5 ></td>
+    </tr>
+    </tbody>
+  </table>
+
+
+
+
+
+
+
   <div class="spread-details-container">
     <h1 id="spread"></h1>
     <h2 id="spreadPrice"></h2>
@@ -330,6 +399,26 @@
       });
     }
 
+    function showBalance() {
+      hideMenu()
+
+      energyBalanceContainer = document.getElementById('energyBalanceContainer')
+      energyBalanceContainer.style.display = 'flex'
+
+      invitationTable = document.getElementById('invitationTable')
+      invitationTable.style.display = 'table'
+
+      purchaseTable = document.getElementById('purchaseTable')
+      purchaseTable.style.display = 'table'
+
+      invitationContainerTitle = document.getElementById('invitationContainerTitle')
+      invitationContainerTitle.style.display = 'flex'
+
+      purchaseContainerTitle = document.getElementById('purchaseContainerTitle')
+      purchaseContainerTitle.style.display = 'flex'
+
+    }
+
     function showSpreadDetails(buttonName) {
       hideMenu()
 
@@ -352,9 +441,6 @@
       spreadDetail.style.display = 'flex'
       spreadDetail.style.fontSize = '16pt'
 
-      // doSpreadButton = document.getElementById('doSpreadButton')
-      // doSpreadButton.style.display = 'block'
-
       mainButton.enable();
       mainButton.show();
       mainButton.onClick(function(){
@@ -372,15 +458,9 @@
       document.querySelectorAll('.spread-details-container').forEach(inputField => {
           inputField.style.display = 'none'
       })
-
-      // doSpreadButton = document.getElementById('doSpreadButton')
-      // doSpreadButton.style.display = 'none'
     }
 
     function showMoreUserDetails() {
-
-      // doSpreadButton.disable()
-      // doSpreadButton.hide()
 
         hideSpreadDetails()
 
@@ -398,18 +478,6 @@
             inputField.style.display = 'flex'
           })
         }
-
-        // getButton = document.getElementById('questionToTheCardReadingButton')
-        // getButton.style.display = 'block'
-
-        // showReadingButton.enable();
-        // showReadingButton.show()
-        // showReadingButton.onClick(function(){
-        //   showReading();
-        // })
-        // showReadingButton.offClick(function(){
-        //   showReading();
-        // })
         mainButton.text = 'Get a reading'
     }
 
