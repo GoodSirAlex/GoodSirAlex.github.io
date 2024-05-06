@@ -371,8 +371,20 @@
 
     const mainButton = window.Telegram.WebApp.MainButton;
     mainButton.text = "Do a spread for x magic gems";
+    mainButton.onClick(function(){
+      handleMainButtonClick();
+    })
+    mainButton.offClick(function(){
+      handleMainButtonClick();
+    })
 
     const backButton = window.Telegram.WebApp.BackButton;
+    backButton.onClick(function(){
+      handleBackButtonClick();
+    })
+    backButton.offClick(function(){
+      handleBackButtonClick();
+    })
 
     var currentScreen = 'main'
     var selectedSpread = 'questionToTheCards'
@@ -415,12 +427,6 @@
       currentScreen = 'showBalance'
 
       backButton.show();
-      backButton.onClick(function(){
-        handleBackButtonClick();
-      })
-      backButton.offClick(function(){
-        handleBackButtonClick();
-      })
 
     }
 
@@ -448,25 +454,11 @@
 
       mainButton.enable();
       mainButton.show();
-      mainButton.onClick(function(){
-        handleMainButtonClick();
-      })
-      mainButton.offClick(function(){
-        handleMainButtonClick();
-      })
 
       selectedSpread = buttonName
       currentScreen = 'showSpreadDetails'
 
       backButton.show();
-      backButton.onClick(function(){
-        handleBackButtonClick();
-      })
-      backButton.offClick(function(){
-        handleBackButtonClick();
-      })
-
-
     }
 
     function hideSpreadDetails() {
@@ -602,24 +594,12 @@
       document.getElementById('readingContainer').style.display = 'none';
       document.getElementById('readingDetailsContainer').style.display = 'none';
       document.getElementById('userDetailsContainer').style.display = 'none';
-      
-      // document.querySelectorAll('#inputFields').forEach(inputField => {
-      //       inputField.style.display = 'none'
-      // })
-      // document.querySelectorAll('#inputFieldsQuestion').forEach(inputField => {
-      //       inputField.style.display = 'none'
-      // })
-      // document.querySelectorAll('#NameAndDateOfBirthTitle').forEach(titleField => {
-      //     titleField.style.display = 'none'
-      // })
-      // document.querySelectorAll('#questionToTheCardTitle').forEach(titleField => {
-      //     titleField.style.display = 'none'
-      // })
-  
 
       backButton.hide();
-      mainButton.disable()
       mainButton.hide()
+
+      currentScreen = 'main'
+      
     }
 
      // Function to dismiss keyboard on tap outside of input fields
