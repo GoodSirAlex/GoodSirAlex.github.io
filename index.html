@@ -302,11 +302,6 @@
   </table>
 
 
-
-
-
-
-
   <div class="spread-details-container">
     <h1 id="spread"></h1>
     <h2 id="spreadPrice"></h2>
@@ -380,6 +375,9 @@
     const mainButton = window.Telegram.WebApp.MainButton;
     mainButton.text = "Do a spread for x magic gems";
 
+    const backButton = window.Telegram.WebApp.BackButton;
+
+    var currentScreen = 'main'
     var selectedSpread = 'questionToTheCards'
     var userName = ''
     var userDateOfBirth = ''
@@ -417,6 +415,16 @@
       purchaseContainerTitle = document.getElementById('purchaseContainerTitle')
       purchaseContainerTitle.style.display = 'flex'
 
+      currentScreen = 'showBalance'
+
+      backButton.show();
+      backButton.onClick(function(){
+        handleBackButtonClick();
+      })
+      backButton.offClick(function(){
+        handleBackButtonClick();
+      })
+
     }
 
     function showSpreadDetails(buttonName) {
@@ -451,6 +459,16 @@
       })
 
       selectedSpread = buttonName
+      currentScreen = 'showSpreadDetails'
+
+      backButton.show();
+      backButton.onClick(function(){
+        handleBackButtonClick();
+      })
+      backButton.offClick(function(){
+        handleBackButtonClick();
+      })
+
 
     }
 
@@ -479,6 +497,7 @@
           })
         }
         mainButton.text = 'Get a reading'
+        currentScreen = 'showMoreUserDetails'
     }
 
     function hideMoreUserDetails() {
@@ -562,8 +581,9 @@
         readingDetail.style.fontSize = '16pt'
         readingDetail.style.width = '90%'
         mainButton.text = 'Share'
+        currentScreen = 'showReading'
+        backButton.show()
       }
-
     }
 
     function showMainMenu() {
@@ -600,6 +620,10 @@
 
       getButton = document.getElementById('questionToTheCardReadingButton')
       getButton.style.display = 'none'
+
+      backButton.hide();
+      mainButton.disable()
+      mainButton.hide()
     }
 
      // Function to dismiss keyboard on tap outside of input fields
@@ -642,6 +666,18 @@
         showMoreUserDetails()
       } else if (mainButton.text === 'Get a reading') {
         showReading()
+      }
+    }
+
+    function handleBackButtonClick() {
+      if (currentScreen === 'showBalance') {
+        showMainMenu()
+      } else if (currentScreen === 'showSpreadDetails') {
+        showMainMenu()
+      } else if (currentScreen === 'showMoreUserDetails') {
+        showSpreadDetails()
+      } else if (currentScreen === 'showReading') {
+        showMainMenu()
       }
     }
 
