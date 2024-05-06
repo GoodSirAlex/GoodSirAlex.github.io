@@ -266,9 +266,6 @@
   </div>
 
 
-
-
-
   <div class="invitation-container-title" id="invitationContainerTitle" style="display: none; margin: 0 auto; justify-content: center;">
     <h1 style="display: inline-block; width: 300px; font-size: 16pt; font-weight: 600;">Get for free</h1>
   </div>
@@ -302,12 +299,12 @@
   </table>
 
 
-  <div class="spread-details-container">
+  <div class="spread-details-container" id="spreadDetailsContainer">
     <h1 id="spread"></h1>
     <h2 id="spreadPrice"></h2>
     <div class="spread-details" id="spreadDetails" style="color: white;"></div>
   </div>
-  <div>
+  <div id="userDetailsContainer">
     <h1 id="NameAndDateOfBirthTitle">ENTER YOUR NAME AND DATE OF BIRTH</h1>
     <div id="inputFields" class="input-fields">
       <input type="text" id="nameInput" placeholder="Your name" style="margin-bottom: 0px; border-bottom: 1px solid #333; max-height: 60px;">
@@ -330,7 +327,7 @@
       <img src="cards/3.jpeg" alt="Image 3">
     </div>
   </div>
-  <div class="reading-details-container" style="margin-bottom: 100px;">
+  <div class="reading-details-container" id="readingDetailsContainer" style="margin-bottom: 100px;">
     <h1 id="readingTitle"></h1>
     <div class="reading-details-subtitle" id="readingDetailsSubtitle" style="color: white; margin: 0 auto; margin-bottom: 20px;"></div>
     <div class="reding-details" id="readingDetails" style="color: white; margin: 0 auto;"></div>
@@ -587,39 +584,38 @@
     }
 
     function showMainMenu() {
+      document.getElementById('mainContainer').style.display = 'flex';
+      document.getElementById('buttonContainerTitle').style.display = 'flex';
       document.querySelectorAll('.menu-button').forEach(button => {
           button.style.display = 'block';
-      });
-      document.getElementById('inputFields').style.display = 'none';
-      document.querySelectorAll('.back-button').forEach(backButton => {
-          backButton.style.display = 'none';
-      });
-      
-      document.querySelectorAll('#inputFields').forEach(inputField => {
-            inputField.style.display = 'none'
-      })
-      document.querySelectorAll('#inputFieldsQuestion').forEach(inputField => {
-            inputField.style.display = 'none'
-      })
-      document.querySelectorAll('#NameAndDateOfBirthTitle').forEach(titleField => {
-          titleField.style.display = 'none'
-      })
-      document.querySelectorAll('#questionToTheCardTitle').forEach(titleField => {
-          titleField.style.display = 'none'
-      })
-      getButton = document.getElementById('questionToTheCardReadingButton')
-      getButton.style.display = 'block'
-      document.querySelectorAll('.main-container').forEach(mainContainer => {
-        mainContainer.style.display = 'flex';
       });
       document.querySelectorAll('.button-container').forEach(buttonContainer => {
           buttonContainer.style.display = 'flex';
       });
-      buttonContainerTitle = document.getElementById('buttonContainerTitle')
-      buttonContainerTitle.style.display = 'flex'
 
-      getButton = document.getElementById('questionToTheCardReadingButton')
-      getButton.style.display = 'none'
+
+      document.getElementById('energyBalanceContainer').style.display = 'none';
+      document.getElementById('invitationContainerTitle').style.display = 'none';
+      document.getElementById('purchaseContainerTitle').style.display = 'none';
+      document.getElementById('spreadDetailsContainer').style.display = 'none';
+      document.getElementById('inputFields').style.display = 'none';
+      document.getElementById('readingContainer').style.display = 'none';
+      document.getElementById('readingDetailsContainer').style.display = 'none';
+      document.getElementById('userDetailsContainer').style.display = 'none';
+      
+      // document.querySelectorAll('#inputFields').forEach(inputField => {
+      //       inputField.style.display = 'none'
+      // })
+      // document.querySelectorAll('#inputFieldsQuestion').forEach(inputField => {
+      //       inputField.style.display = 'none'
+      // })
+      // document.querySelectorAll('#NameAndDateOfBirthTitle').forEach(titleField => {
+      //     titleField.style.display = 'none'
+      // })
+      // document.querySelectorAll('#questionToTheCardTitle').forEach(titleField => {
+      //     titleField.style.display = 'none'
+      // })
+  
 
       backButton.hide();
       mainButton.disable()
